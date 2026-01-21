@@ -20,13 +20,19 @@ public class LetterPileComponent : MonoBehaviour
     [Header("Debug", order = 2)]
     [SerializeField] bool useDebug = false;
 
+    [SerializeField] Vector3 defaultPosition = Vector3.zero;
+    [SerializeField] Quaternion defaultRotation = Quaternion.identity;
+
     void Start()
     {
-        Init();
+        Init();//TODO Remove, the storage letter game will do it
     }
     
     public void Init()
     {
+        defaultPosition = transform.position;
+        defaultRotation = transform.rotation;
+
         grab = GetComponent<XRGrabInteractable>();//Get the component to edit the grab behavior
 
         if (grab)
@@ -35,6 +41,7 @@ public class LetterPileComponent : MonoBehaviour
             grab.trackRotation = false;
             grab.selectEntered.AddListener(OnSelectEntered); //When a hand interact with this object it calls a function
             grab.selectExited.AddListener(OnSelectExited); //When a hand exit interact with this object it calls a function
+            
         }
         
         if (progressBar)
@@ -43,6 +50,15 @@ public class LetterPileComponent : MonoBehaviour
         }
     }
 
+    public void Reset()
+    {
+        grab.trackPosition = false;
+        grab.trackRotation = false;
+        isGrabbed = false;
+        transform.position = defaultPosition;
+        transform.rotation = defaultRotation;
+        progressBar.Activate = true;
+    }
     private void OnCollisionEnter(Collision _collision)
     {
         //When a collision is trigger, check if it's the box to validate the position

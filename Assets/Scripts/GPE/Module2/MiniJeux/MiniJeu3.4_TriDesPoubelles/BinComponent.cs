@@ -12,6 +12,7 @@ public class BinComponent : MonoBehaviour
         if (!_garbage) return;
 
         garbages.Add(_garbage);
+        Debug.Log(garbages.Count);
     }
 
     void OnTriggerExit(Collider _other)
@@ -20,22 +21,16 @@ public class BinComponent : MonoBehaviour
         if (!_garbage) return;
 
         garbages.Remove(_garbage);
+
+        Debug.Log(garbages.Count);
     }
 
-    private void Update()
+    public int GetCorrectCount()
     {
-        Debug.Log(ComputePercentage());
-    }
-
-    float ComputePercentage()
-    {
-        int _garbageCount = garbages.Count;
-        if (_garbageCount == 0) return 0f;
-
-        int _correctGarbageCount = 0;
+        int _result = 0;
         foreach (GarbageComponent _garbage in garbages)
-            if (_garbage.IsReciclable == canRecycle) ++_correctGarbageCount;
-            
-        return _correctGarbageCount / _garbageCount;
+            if (_garbage.IsReciclable == canRecycle) ++_result;
+
+        return _result;
     }
 }

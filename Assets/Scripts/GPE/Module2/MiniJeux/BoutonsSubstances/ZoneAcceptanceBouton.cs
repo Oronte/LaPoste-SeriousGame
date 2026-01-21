@@ -19,8 +19,6 @@ public class ZoneAcceptanceBouton : MonoBehaviour
 
     private void OnTriggerEnter(Collider _other)
     {
-        if (!IsHand(_other)) return;
-
         if(_other.bounds.Intersects(acceptZone.bounds))
         {
             Debug.Log("Enter Success");
@@ -38,8 +36,6 @@ public class ZoneAcceptanceBouton : MonoBehaviour
 
     private void OnTriggerExit(Collider _other)
     {
-        if (!IsHand(_other)) return;
-
         if(IsInsideAcceptZone && !_other.bounds.Intersects(acceptZone.bounds))
         {
             Debug.Log("Exit Success");
@@ -53,11 +49,6 @@ public class ZoneAcceptanceBouton : MonoBehaviour
             IsInsideFailZone = false;
             OnExitFail?.Invoke();
         }
-    }
-
-    private bool IsHand(Collider _collision)
-    {
-        return _collision.GetComponentInParent<XRDirectInteractor>() != null;
     }
 
     private void OnDrawGizmos()

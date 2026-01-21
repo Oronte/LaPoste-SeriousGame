@@ -18,9 +18,12 @@ public class RadialProgressBar : MonoBehaviour
 
     [Header("Compteur", order = 1)]
     [SerializeField] float time = 1.0f;
+    float defaultTime = 1.0f;
     [SerializeField] float maxTime = 1.0f;
     [SerializeField] float incrementMultiplier = 1.0f;
     [SerializeField] float decrementMultiplier = 1.0f;
+    [SerializeField] bool hideIfFinish = false;
+    [SerializeField] bool resetIfFinish = false;
 
     [Header("Color", order = 2)]
     [SerializeField] Color startColor = Color.green;
@@ -37,18 +40,24 @@ public class RadialProgressBar : MonoBehaviour
     [SerializeField, InspectorName("Activer ?")] bool activate = false;
     public bool Activate { get => activate; set => activate = value; }
 
-    void Init()
+    public void Init()
     {
+        defaultTime = time;
         if (percentText) percentText.color = textColor;
         if (backgroundImage) backgroundImage.color = backgroundColor;
         if (fillImage) fillImage.color = startColor;
+        if (fillImage) fillImage.fillAmount = time;
+        UpdateText();
+    }
+
+    public void Reset()
+    {
+        time = defaultTime;
     }
 
     private void Start()
     {
-        Init();
-        if (fillImage) fillImage.fillAmount = time;
-        UpdateText();
+        Init();//TODO Remove, the storage letter game will do it
     }
 
     void Update()
@@ -56,22 +65,26 @@ public class RadialProgressBar : MonoBehaviour
         if (!fillImage) return;
 
         if (activate) IncrementProgressBar();
-        if (!activate && time > 0.0f) DecrementProgressBar();
+
+        if (!activate && time >= maxTime)
+            DecrementProgressBar();
+        else if (!activate && time > 0.0f && time < maxTime)
+            DecrementProgressBar();
     }
 
     void IncrementProgressBar()
     {
         SetVisibility(true);
         time += Time.deltaTime * incrementMultiplier;
-        fillImage.fillAmount = time;
+        fillImage.fillAmount = time/maxTime;
 
         if (time >= maxTime)
         {
             onMaxValue?.Invoke();
-            activate = false;
-            time = 0.0f;
-            fillImage.fillAmount = 0.0f;
-            SetVisibility(false);
+            //activate = false;
+            time = resetIfFinish ? 0.0f : maxTime;
+            fillImage.fillAmount = resetIfFinish ? 0.0f : 1.0f;
+            if (hideIfFinish) SetVisibility(false);
         }
 
         UpdateText();
@@ -82,7 +95,7 @@ public class RadialProgressBar : MonoBehaviour
     {
         SetVisibility(true);
         time -= Time.deltaTime * decrementMultiplier;
-        fillImage.fillAmount = time;
+        fillImage.fillAmount = time/maxTime;
 
         if (time <= 0.0f)
         {
@@ -90,7 +103,7 @@ public class RadialProgressBar : MonoBehaviour
             activate = false;
             time = 0.0f;
             fillImage.fillAmount = 0.0f;
-            SetVisibility(false);
+            if (hideIfFinish) SetVisibility(false);
         }
 
         UpdateText();

@@ -4,20 +4,23 @@ using UnityEngine;
 [Serializable]
 public class DrugState : CameraState
 {
-    [SerializeField] private Transform realHeadTarget;
+    public DruggedEffect cameraEffectScript;
+    public float positionSmoothTime = 0.3f;
+    public float rotationSmoothTime = 0.3f;
 
-    [SerializeField] private DruggedEffect cameraEffectScript;
+    private Vector3 currentVelocity;
+
+
+    public override void Enter()
+    {
+    }
 
     public override void Trigger()
     {
-        if (cameraEffectScript == null)
-        {
-            return;
-        }
 
-        cameraEffectScript.targetEye = realHeadTarget;
+        //transform.position = Vector3.SmoothDamp(transform.position, realHeadTarget.position, ref currentVelocity, positionSmoothTime);
 
-        cameraEffectScript.enabled = true;
+        transform.rotation = Quaternion.Slerp(transform.rotation, realHeadTarget.rotation, Time.deltaTime / rotationSmoothTime);
 
         Debug.Log("Mode Drogué activé.");
     }
@@ -26,4 +29,6 @@ public class DrugState : CameraState
     {
         if (cameraEffectScript != null) cameraEffectScript.enabled = false;
     }
+
+
 }

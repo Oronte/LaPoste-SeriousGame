@@ -11,9 +11,11 @@ public class WedgeComponent : MonoBehaviour
     [SerializeField] bool isRemoved = false;//La cale a été relevé ?
     public bool IsRemoved { get => isRemoved; set => isRemoved = value; }
 
+    [SerializeField] Vector3 defaultPosition = Vector3.zero;
+    [SerializeField] Quaternion defaultRotation = Quaternion.identity;
     void Start()
     {
-        Init();
+        Init(); //TODO Remove, the storage letter game will do it
     }
 
     public void Init()
@@ -22,8 +24,17 @@ public class WedgeComponent : MonoBehaviour
         joint = GetComponent<HingeJoint>();
         grab.selectEntered.AddListener(OnSelectEntered); //When a hand interact with this object it calls a function
         grab.selectExited.AddListener(OnSelectExited); //When a hand interact with this object it calls a function
+        defaultPosition = transform.position;
+        defaultRotation = transform.rotation;
     }
 
+    public void Reset()
+    {
+        isGrabbed = false;
+        isRemoved = false;
+        transform.position = defaultPosition;
+        transform.rotation = defaultRotation;
+    }
 
     private void Update()
     {

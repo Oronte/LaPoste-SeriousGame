@@ -44,6 +44,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 0ce4f3b945b7d544f9cc9f9935504e95
+  - enabled: 1
+    path: Assets/Scenes/Scene_TestRechargerSam.unity
+    guid: 3447a1c7c9464ad45af9814bf30c28ac
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 4b3f4cdd2c84f2e468c12ee1766e8607, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

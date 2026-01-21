@@ -67,8 +67,8 @@ MonoBehaviour:
   maxTime: 1
   incrementMultiplier: 1
   decrementMultiplier: 1
-  startColor: {r: 1, g: 0, b: 0, a: 1}
-  endColor: {r: 0, g: 0.39506817, b: 1, a: 1}
+  startColor: {r: 0, g: 1, b: 0.016851187, a: 1}
+  endColor: {r: 1, g: 0, b: 0.16923761, a: 1}
   backgroundColor: {r: 0.16037738, g: 0.16037738, b: 0.16037738, a: 1}
   textColor: {r: 1, g: 1, b: 1, a: 1}
   onMinValue:

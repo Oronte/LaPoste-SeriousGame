@@ -338,6 +338,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1178669265203369731, guid: e47afbbd63760ea438889698d1ee047f, type: 3}
+      propertyPath: m_MovementType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2135059713724503710, guid: e47afbbd63760ea438889698d1ee047f, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6131736105607694567, guid: e47afbbd63760ea438889698d1ee047f, type: 3}
       propertyPath: m_Name
       value: TestDechetRecyclable (1)
