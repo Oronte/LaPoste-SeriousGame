@@ -23,15 +23,19 @@ public class RadialProgressBar : MonoBehaviour
     [SerializeField] float decrementMultiplier = 1.0f;
 
     [Header("Color", order = 2)]
-    [SerializeField] Color startColor = Color.red;
-    [SerializeField] Color endColor = Color.green;
+    [SerializeField] Color startColor = Color.green;
+    [SerializeField] Color endColor = Color.red;
     [SerializeField] Color backgroundColor = new Color(22, 22, 22);
     [SerializeField] Color textColor = Color.white;
 
     [Header("Event", order = 3)]
     [SerializeField] UnityEvent onMinValue = null;
     [SerializeField] UnityEvent onMaxValue = null;
+    public UnityEvent OnMinValue => onMinValue;
+    public UnityEvent OnMaxValue => onMaxValue;
+
     [SerializeField, InspectorName("Activer ?")] bool activate = false;
+    public bool Activate { get => activate; set => activate = value; }
 
     void Init()
     {

@@ -31,6 +31,42 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Eye Gaze Position",
+                    "type": "Value",
+                    "id": "35e61c2f-dc11-44d4-8d73-f0544321312b",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Eye Gaze Is Tracked",
+                    "type": "Button",
+                    "id": "44ff38ba-085d-4db3-b07b-230bd7439cd9",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Eye Gaze Rotation",
+                    "type": "Value",
+                    "id": "b605b9af-3919-407a-8329-9b2d104a88c5",
+                    "expectedControlType": "Quaternion",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Eye Gaze Tracking State",
+                    "type": "Value",
+                    "id": "3067e7bd-b5d0-40a8-b29f-f7fddca7ee7b",
+                    "expectedControlType": "Integer",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -66,6 +102,182 @@
                     "action": "Tracking State",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "Vector 3 Fallback",
+                    "id": "6690bf65-93f8-43de-8a8f-62d21d8b59b1",
+                    "path": "Vector3Fallback",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Position",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "first",
+                    "id": "d172af9c-c94f-4a1f-a3f2-20d3adf097e2",
+                    "path": "<EyeGaze>/pose/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Position",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "second",
+                    "id": "048e4368-0663-4773-9a89-29bfb44f660a",
+                    "path": "<XRHMD>/centerEyePosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Position",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "third",
+                    "id": "77e391bc-eba3-4a2f-88df-b2ddbf645e15",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Position",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Button Fallback",
+                    "id": "926ecc38-8128-4438-b656-a9185ed2483e",
+                    "path": "ButtonFallback",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Is Tracked",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "first",
+                    "id": "3656bbd5-5429-47b2-9893-433ff3654f05",
+                    "path": "<EyeGaze>/pose/isTracked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Is Tracked",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "second",
+                    "id": "1fb6076f-eb15-4c38-bf28-0a1a83d8fb0d",
+                    "path": "<XRHMD>/isTracked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Is Tracked",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "third",
+                    "id": "55717efd-d483-4382-b216-7f731cc30472",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Is Tracked",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Quaternion Fallback",
+                    "id": "daedd878-7a9d-4821-8067-9e5afd4c536b",
+                    "path": "QuaternionFallback",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Rotation",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "first",
+                    "id": "ce190d31-0ceb-4706-8143-4510e737d13d",
+                    "path": "<EyeGaze>/pose/rotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "second",
+                    "id": "f53c1e9c-9887-4aef-9f93-43b522c746c3",
+                    "path": "<XRHMD>/centerEyeRotation",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "third",
+                    "id": "9e953e21-01e8-48f7-8d68-d1aa13aad26f",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Integer Fallback",
+                    "id": "dafd6379-c946-4927-972e-3407d9bdf1e8",
+                    "path": "IntegerFallback",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Tracking State",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "first",
+                    "id": "fb9341b6-c6d4-446d-9779-07d374147002",
+                    "path": "<EyeGaze>/pose/trackingState",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Tracking State",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "second",
+                    "id": "21b51852-eb81-479e-a4ba-adb4494cc826",
+                    "path": "<XRHMD>/trackingState",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Tracking State",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "third",
+                    "id": "e381a2de-95c0-4f28-9341-e3695c2937c0",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Eye Gaze Tracking State",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },
@@ -101,7 +313,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Grab",
+                    "name": "Grip",
                     "type": "Button",
                     "id": "2f74634c-e967-4326-b3ba-26d8fc3c1a04",
                     "expectedControlType": "",
@@ -126,6 +338,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "GripButton",
+                    "type": "Button",
+                    "id": "08a27fa0-af70-469e-9366-b07013dea6ab",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Haptic Device",
+                    "type": "PassThrough",
+                    "id": "1ab268d0-a903-487f-97f2-ae794e16d3b1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -165,11 +395,11 @@
                 {
                     "name": "",
                     "id": "31a6b431-c7dc-4e8b-88b9-f20272b7f0d5",
-                    "path": "<XRController>{RightHand}/{GripButton}",
+                    "path": "<XRController>{RightHand}/{Grip}",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Grab",
+                    "action": "Grip",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -194,6 +424,28 @@
                     "action": "Aim Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3a86f1d8-1a04-4a5a-b512-c0ae004b8eff",
+                    "path": "<XRController>{RightHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "GripButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7bd078a6-e6e5-4ddd-a412-06eecbbfd4e6",
+                    "path": "<XRController>{RightHand}/*",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Haptic Device",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -207,6 +459,15 @@
                     "id": "205c82eb-254a-4904-9d87-822d9cdf86d2",
                     "expectedControlType": "Vector3",
                     "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "UI Scroll",
+                    "type": "Value",
+                    "id": "5f59df70-4e40-4483-82da-17049ada5c25",
+                    "expectedControlType": "Vector2",
+                    "processors": "InvertVector2(invertY=false)",
                     "interactions": "",
                     "initialStateCheck": true
                 },
@@ -227,6 +488,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Grip",
+                    "type": "Button",
+                    "id": "b04dd284-2783-45a3-b819-1a612407096c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Haptic Device",
+                    "type": "PassThrough",
+                    "id": "6b65959e-7af3-4a9a-952b-668155d364e1",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Joystick",
+                    "type": "Value",
+                    "id": "854a96d2-866c-465f-8e44-b0496d65f4c0",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -238,6 +526,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Position",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c82210b-e76b-4250-bbb9-9a4918b20728",
+                    "path": "<XRController>{LeftHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UI Scroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -260,6 +559,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "Tracking State",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "62bb7d85-f7a6-42e1-9ddb-da52aebd7827",
+                    "path": "<XRController>{LeftHand}/{Grip}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55d3b737-94d6-4d09-a147-1e9fc0a9cddf",
+                    "path": "<XRController>{LeftHand}/*",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Haptic Device",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bca4dbaf-5613-4113-b496-3d4bca8dbf3f",
+                    "path": "<OculusTouchController>{LeftHand}/thumbstick/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Joystick",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

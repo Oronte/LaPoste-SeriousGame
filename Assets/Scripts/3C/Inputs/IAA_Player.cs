@@ -117,6 +117,42 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Eye Gaze Position"",
+                    ""type"": ""Value"",
+                    ""id"": ""35e61c2f-dc11-44d4-8d73-f0544321312b"",
+                    ""expectedControlType"": ""Vector3"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Eye Gaze Is Tracked"",
+                    ""type"": ""Button"",
+                    ""id"": ""44ff38ba-085d-4db3-b07b-230bd7439cd9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Eye Gaze Rotation"",
+                    ""type"": ""Value"",
+                    ""id"": ""b605b9af-3919-407a-8329-9b2d104a88c5"",
+                    ""expectedControlType"": ""Quaternion"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Eye Gaze Tracking State"",
+                    ""type"": ""Value"",
+                    ""id"": ""3067e7bd-b5d0-40a8-b29f-f7fddca7ee7b"",
+                    ""expectedControlType"": ""Integer"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -152,6 +188,182 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""action"": ""Tracking State"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""Vector 3 Fallback"",
+                    ""id"": ""6690bf65-93f8-43de-8a8f-62d21d8b59b1"",
+                    ""path"": ""Vector3Fallback"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Position"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""first"",
+                    ""id"": ""d172af9c-c94f-4a1f-a3f2-20d3adf097e2"",
+                    ""path"": ""<EyeGaze>/pose/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""second"",
+                    ""id"": ""048e4368-0663-4773-9a89-29bfb44f660a"",
+                    ""path"": ""<XRHMD>/centerEyePosition"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""third"",
+                    ""id"": ""77e391bc-eba3-4a2f-88df-b2ddbf645e15"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Button Fallback"",
+                    ""id"": ""926ecc38-8128-4438-b656-a9185ed2483e"",
+                    ""path"": ""ButtonFallback"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Is Tracked"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""first"",
+                    ""id"": ""3656bbd5-5429-47b2-9893-433ff3654f05"",
+                    ""path"": ""<EyeGaze>/pose/isTracked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Is Tracked"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""second"",
+                    ""id"": ""1fb6076f-eb15-4c38-bf28-0a1a83d8fb0d"",
+                    ""path"": ""<XRHMD>/isTracked"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Is Tracked"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""third"",
+                    ""id"": ""55717efd-d483-4382-b216-7f731cc30472"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Is Tracked"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Quaternion Fallback"",
+                    ""id"": ""daedd878-7a9d-4821-8067-9e5afd4c536b"",
+                    ""path"": ""QuaternionFallback"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Rotation"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""first"",
+                    ""id"": ""ce190d31-0ceb-4706-8143-4510e737d13d"",
+                    ""path"": ""<EyeGaze>/pose/rotation"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""second"",
+                    ""id"": ""f53c1e9c-9887-4aef-9f93-43b522c746c3"",
+                    ""path"": ""<XRHMD>/centerEyeRotation"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""third"",
+                    ""id"": ""9e953e21-01e8-48f7-8d68-d1aa13aad26f"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Rotation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Integer Fallback"",
+                    ""id"": ""dafd6379-c946-4927-972e-3407d9bdf1e8"",
+                    ""path"": ""IntegerFallback"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Tracking State"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""first"",
+                    ""id"": ""fb9341b6-c6d4-446d-9779-07d374147002"",
+                    ""path"": ""<EyeGaze>/pose/trackingState"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Tracking State"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""second"",
+                    ""id"": ""21b51852-eb81-479e-a4ba-adb4494cc826"",
+                    ""path"": ""<XRHMD>/trackingState"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Tracking State"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""third"",
+                    ""id"": ""e381a2de-95c0-4f28-9341-e3695c2937c0"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Eye Gaze Tracking State"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -187,7 +399,7 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""Grab"",
+                    ""name"": ""Grip"",
                     ""type"": ""Button"",
                     ""id"": ""2f74634c-e967-4326-b3ba-26d8fc3c1a04"",
                     ""expectedControlType"": """",
@@ -212,6 +424,24 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GripButton"",
+                    ""type"": ""Button"",
+                    ""id"": ""08a27fa0-af70-469e-9366-b07013dea6ab"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Haptic Device"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""1ab268d0-a903-487f-97f2-ae794e16d3b1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -251,11 +481,11 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""31a6b431-c7dc-4e8b-88b9-f20272b7f0d5"",
-                    ""path"": ""<XRController>{RightHand}/{GripButton}"",
+                    ""path"": ""<XRController>{RightHand}/{Grip}"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Grab"",
+                    ""action"": ""Grip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -280,6 +510,28 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""action"": ""Aim Rotation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3a86f1d8-1a04-4a5a-b512-c0ae004b8eff"",
+                    ""path"": ""<XRController>{RightHand}/{GripButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GripButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7bd078a6-e6e5-4ddd-a412-06eecbbfd4e6"",
+                    ""path"": ""<XRController>{RightHand}/*"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Haptic Device"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -293,6 +545,15 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""id"": ""205c82eb-254a-4904-9d87-822d9cdf86d2"",
                     ""expectedControlType"": ""Vector3"",
                     ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UI Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""5f59df70-4e40-4483-82da-17049ada5c25"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""InvertVector2(invertY=false)"",
                     ""interactions"": """",
                     ""initialStateCheck"": true
                 },
@@ -313,6 +574,33 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Grip"",
+                    ""type"": ""Button"",
+                    ""id"": ""b04dd284-2783-45a3-b819-1a612407096c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Haptic Device"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6b65959e-7af3-4a9a-952b-668155d364e1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Joystick"",
+                    ""type"": ""Value"",
+                    ""id"": ""854a96d2-866c-465f-8e44-b0496d65f4c0"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -324,6 +612,17 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Position"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c82210b-e76b-4250-bbb9-9a4918b20728"",
+                    ""path"": ""<XRController>{LeftHand}/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UI Scroll"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -346,6 +645,39 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Tracking State"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""62bb7d85-f7a6-42e1-9ddb-da52aebd7827"",
+                    ""path"": ""<XRController>{LeftHand}/{Grip}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Grip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""55d3b737-94d6-4d09-a147-1e9fc0a9cddf"",
+                    ""path"": ""<XRController>{LeftHand}/*"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Haptic Device"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bca4dbaf-5613-4113-b496-3d4bca8dbf3f"",
+                    ""path"": ""<OculusTouchController>{LeftHand}/thumbstick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Joystick"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -471,19 +803,29 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         m_Head_Position = m_Head.FindAction("Position", throwIfNotFound: true);
         m_Head_Rotation = m_Head.FindAction("Rotation", throwIfNotFound: true);
         m_Head_TrackingState = m_Head.FindAction("Tracking State", throwIfNotFound: true);
+        m_Head_EyeGazePosition = m_Head.FindAction("Eye Gaze Position", throwIfNotFound: true);
+        m_Head_EyeGazeIsTracked = m_Head.FindAction("Eye Gaze Is Tracked", throwIfNotFound: true);
+        m_Head_EyeGazeRotation = m_Head.FindAction("Eye Gaze Rotation", throwIfNotFound: true);
+        m_Head_EyeGazeTrackingState = m_Head.FindAction("Eye Gaze Tracking State", throwIfNotFound: true);
         // RightController
         m_RightController = asset.FindActionMap("RightController", throwIfNotFound: true);
         m_RightController_Position = m_RightController.FindAction("Position", throwIfNotFound: true);
         m_RightController_Rotation = m_RightController.FindAction("Rotation", throwIfNotFound: true);
         m_RightController_TrackingState = m_RightController.FindAction("Tracking State", throwIfNotFound: true);
-        m_RightController_Grab = m_RightController.FindAction("Grab", throwIfNotFound: true);
+        m_RightController_Grip = m_RightController.FindAction("Grip", throwIfNotFound: true);
         m_RightController_AimPosition = m_RightController.FindAction("Aim Position", throwIfNotFound: true);
         m_RightController_AimRotation = m_RightController.FindAction("Aim Rotation", throwIfNotFound: true);
+        m_RightController_GripButton = m_RightController.FindAction("GripButton", throwIfNotFound: true);
+        m_RightController_HapticDevice = m_RightController.FindAction("Haptic Device", throwIfNotFound: true);
         // LeftController
         m_LeftController = asset.FindActionMap("LeftController", throwIfNotFound: true);
         m_LeftController_Position = m_LeftController.FindAction("Position", throwIfNotFound: true);
+        m_LeftController_UIScroll = m_LeftController.FindAction("UI Scroll", throwIfNotFound: true);
         m_LeftController_Rotation = m_LeftController.FindAction("Rotation", throwIfNotFound: true);
         m_LeftController_TrackingState = m_LeftController.FindAction("Tracking State", throwIfNotFound: true);
+        m_LeftController_Grip = m_LeftController.FindAction("Grip", throwIfNotFound: true);
+        m_LeftController_HapticDevice = m_LeftController.FindAction("Haptic Device", throwIfNotFound: true);
+        m_LeftController_Joystick = m_LeftController.FindAction("Joystick", throwIfNotFound: true);
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
@@ -575,6 +917,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_Head_Position;
     private readonly InputAction m_Head_Rotation;
     private readonly InputAction m_Head_TrackingState;
+    private readonly InputAction m_Head_EyeGazePosition;
+    private readonly InputAction m_Head_EyeGazeIsTracked;
+    private readonly InputAction m_Head_EyeGazeRotation;
+    private readonly InputAction m_Head_EyeGazeTrackingState;
     /// <summary>
     /// Provides access to input actions defined in input action map "Head".
     /// </summary>
@@ -598,6 +944,22 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Head/TrackingState".
         /// </summary>
         public InputAction @TrackingState => m_Wrapper.m_Head_TrackingState;
+        /// <summary>
+        /// Provides access to the underlying input action "Head/EyeGazePosition".
+        /// </summary>
+        public InputAction @EyeGazePosition => m_Wrapper.m_Head_EyeGazePosition;
+        /// <summary>
+        /// Provides access to the underlying input action "Head/EyeGazeIsTracked".
+        /// </summary>
+        public InputAction @EyeGazeIsTracked => m_Wrapper.m_Head_EyeGazeIsTracked;
+        /// <summary>
+        /// Provides access to the underlying input action "Head/EyeGazeRotation".
+        /// </summary>
+        public InputAction @EyeGazeRotation => m_Wrapper.m_Head_EyeGazeRotation;
+        /// <summary>
+        /// Provides access to the underlying input action "Head/EyeGazeTrackingState".
+        /// </summary>
+        public InputAction @EyeGazeTrackingState => m_Wrapper.m_Head_EyeGazeTrackingState;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -633,6 +995,18 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @TrackingState.started += instance.OnTrackingState;
             @TrackingState.performed += instance.OnTrackingState;
             @TrackingState.canceled += instance.OnTrackingState;
+            @EyeGazePosition.started += instance.OnEyeGazePosition;
+            @EyeGazePosition.performed += instance.OnEyeGazePosition;
+            @EyeGazePosition.canceled += instance.OnEyeGazePosition;
+            @EyeGazeIsTracked.started += instance.OnEyeGazeIsTracked;
+            @EyeGazeIsTracked.performed += instance.OnEyeGazeIsTracked;
+            @EyeGazeIsTracked.canceled += instance.OnEyeGazeIsTracked;
+            @EyeGazeRotation.started += instance.OnEyeGazeRotation;
+            @EyeGazeRotation.performed += instance.OnEyeGazeRotation;
+            @EyeGazeRotation.canceled += instance.OnEyeGazeRotation;
+            @EyeGazeTrackingState.started += instance.OnEyeGazeTrackingState;
+            @EyeGazeTrackingState.performed += instance.OnEyeGazeTrackingState;
+            @EyeGazeTrackingState.canceled += instance.OnEyeGazeTrackingState;
         }
 
         /// <summary>
@@ -653,6 +1027,18 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @TrackingState.started -= instance.OnTrackingState;
             @TrackingState.performed -= instance.OnTrackingState;
             @TrackingState.canceled -= instance.OnTrackingState;
+            @EyeGazePosition.started -= instance.OnEyeGazePosition;
+            @EyeGazePosition.performed -= instance.OnEyeGazePosition;
+            @EyeGazePosition.canceled -= instance.OnEyeGazePosition;
+            @EyeGazeIsTracked.started -= instance.OnEyeGazeIsTracked;
+            @EyeGazeIsTracked.performed -= instance.OnEyeGazeIsTracked;
+            @EyeGazeIsTracked.canceled -= instance.OnEyeGazeIsTracked;
+            @EyeGazeRotation.started -= instance.OnEyeGazeRotation;
+            @EyeGazeRotation.performed -= instance.OnEyeGazeRotation;
+            @EyeGazeRotation.canceled -= instance.OnEyeGazeRotation;
+            @EyeGazeTrackingState.started -= instance.OnEyeGazeTrackingState;
+            @EyeGazeTrackingState.performed -= instance.OnEyeGazeTrackingState;
+            @EyeGazeTrackingState.canceled -= instance.OnEyeGazeTrackingState;
         }
 
         /// <summary>
@@ -693,9 +1079,11 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_RightController_Position;
     private readonly InputAction m_RightController_Rotation;
     private readonly InputAction m_RightController_TrackingState;
-    private readonly InputAction m_RightController_Grab;
+    private readonly InputAction m_RightController_Grip;
     private readonly InputAction m_RightController_AimPosition;
     private readonly InputAction m_RightController_AimRotation;
+    private readonly InputAction m_RightController_GripButton;
+    private readonly InputAction m_RightController_HapticDevice;
     /// <summary>
     /// Provides access to input actions defined in input action map "RightController".
     /// </summary>
@@ -720,9 +1108,9 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @TrackingState => m_Wrapper.m_RightController_TrackingState;
         /// <summary>
-        /// Provides access to the underlying input action "RightController/Grab".
+        /// Provides access to the underlying input action "RightController/Grip".
         /// </summary>
-        public InputAction @Grab => m_Wrapper.m_RightController_Grab;
+        public InputAction @Grip => m_Wrapper.m_RightController_Grip;
         /// <summary>
         /// Provides access to the underlying input action "RightController/AimPosition".
         /// </summary>
@@ -731,6 +1119,14 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "RightController/AimRotation".
         /// </summary>
         public InputAction @AimRotation => m_Wrapper.m_RightController_AimRotation;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/GripButton".
+        /// </summary>
+        public InputAction @GripButton => m_Wrapper.m_RightController_GripButton;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/HapticDevice".
+        /// </summary>
+        public InputAction @HapticDevice => m_Wrapper.m_RightController_HapticDevice;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -766,15 +1162,21 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @TrackingState.started += instance.OnTrackingState;
             @TrackingState.performed += instance.OnTrackingState;
             @TrackingState.canceled += instance.OnTrackingState;
-            @Grab.started += instance.OnGrab;
-            @Grab.performed += instance.OnGrab;
-            @Grab.canceled += instance.OnGrab;
+            @Grip.started += instance.OnGrip;
+            @Grip.performed += instance.OnGrip;
+            @Grip.canceled += instance.OnGrip;
             @AimPosition.started += instance.OnAimPosition;
             @AimPosition.performed += instance.OnAimPosition;
             @AimPosition.canceled += instance.OnAimPosition;
             @AimRotation.started += instance.OnAimRotation;
             @AimRotation.performed += instance.OnAimRotation;
             @AimRotation.canceled += instance.OnAimRotation;
+            @GripButton.started += instance.OnGripButton;
+            @GripButton.performed += instance.OnGripButton;
+            @GripButton.canceled += instance.OnGripButton;
+            @HapticDevice.started += instance.OnHapticDevice;
+            @HapticDevice.performed += instance.OnHapticDevice;
+            @HapticDevice.canceled += instance.OnHapticDevice;
         }
 
         /// <summary>
@@ -795,15 +1197,21 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @TrackingState.started -= instance.OnTrackingState;
             @TrackingState.performed -= instance.OnTrackingState;
             @TrackingState.canceled -= instance.OnTrackingState;
-            @Grab.started -= instance.OnGrab;
-            @Grab.performed -= instance.OnGrab;
-            @Grab.canceled -= instance.OnGrab;
+            @Grip.started -= instance.OnGrip;
+            @Grip.performed -= instance.OnGrip;
+            @Grip.canceled -= instance.OnGrip;
             @AimPosition.started -= instance.OnAimPosition;
             @AimPosition.performed -= instance.OnAimPosition;
             @AimPosition.canceled -= instance.OnAimPosition;
             @AimRotation.started -= instance.OnAimRotation;
             @AimRotation.performed -= instance.OnAimRotation;
             @AimRotation.canceled -= instance.OnAimRotation;
+            @GripButton.started -= instance.OnGripButton;
+            @GripButton.performed -= instance.OnGripButton;
+            @GripButton.canceled -= instance.OnGripButton;
+            @HapticDevice.started -= instance.OnHapticDevice;
+            @HapticDevice.performed -= instance.OnHapticDevice;
+            @HapticDevice.canceled -= instance.OnHapticDevice;
         }
 
         /// <summary>
@@ -842,8 +1250,12 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_LeftController;
     private List<ILeftControllerActions> m_LeftControllerActionsCallbackInterfaces = new List<ILeftControllerActions>();
     private readonly InputAction m_LeftController_Position;
+    private readonly InputAction m_LeftController_UIScroll;
     private readonly InputAction m_LeftController_Rotation;
     private readonly InputAction m_LeftController_TrackingState;
+    private readonly InputAction m_LeftController_Grip;
+    private readonly InputAction m_LeftController_HapticDevice;
+    private readonly InputAction m_LeftController_Joystick;
     /// <summary>
     /// Provides access to input actions defined in input action map "LeftController".
     /// </summary>
@@ -860,6 +1272,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Position => m_Wrapper.m_LeftController_Position;
         /// <summary>
+        /// Provides access to the underlying input action "LeftController/UIScroll".
+        /// </summary>
+        public InputAction @UIScroll => m_Wrapper.m_LeftController_UIScroll;
+        /// <summary>
         /// Provides access to the underlying input action "LeftController/Rotation".
         /// </summary>
         public InputAction @Rotation => m_Wrapper.m_LeftController_Rotation;
@@ -867,6 +1283,18 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "LeftController/TrackingState".
         /// </summary>
         public InputAction @TrackingState => m_Wrapper.m_LeftController_TrackingState;
+        /// <summary>
+        /// Provides access to the underlying input action "LeftController/Grip".
+        /// </summary>
+        public InputAction @Grip => m_Wrapper.m_LeftController_Grip;
+        /// <summary>
+        /// Provides access to the underlying input action "LeftController/HapticDevice".
+        /// </summary>
+        public InputAction @HapticDevice => m_Wrapper.m_LeftController_HapticDevice;
+        /// <summary>
+        /// Provides access to the underlying input action "LeftController/Joystick".
+        /// </summary>
+        public InputAction @Joystick => m_Wrapper.m_LeftController_Joystick;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -896,12 +1324,24 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @Position.started += instance.OnPosition;
             @Position.performed += instance.OnPosition;
             @Position.canceled += instance.OnPosition;
+            @UIScroll.started += instance.OnUIScroll;
+            @UIScroll.performed += instance.OnUIScroll;
+            @UIScroll.canceled += instance.OnUIScroll;
             @Rotation.started += instance.OnRotation;
             @Rotation.performed += instance.OnRotation;
             @Rotation.canceled += instance.OnRotation;
             @TrackingState.started += instance.OnTrackingState;
             @TrackingState.performed += instance.OnTrackingState;
             @TrackingState.canceled += instance.OnTrackingState;
+            @Grip.started += instance.OnGrip;
+            @Grip.performed += instance.OnGrip;
+            @Grip.canceled += instance.OnGrip;
+            @HapticDevice.started += instance.OnHapticDevice;
+            @HapticDevice.performed += instance.OnHapticDevice;
+            @HapticDevice.canceled += instance.OnHapticDevice;
+            @Joystick.started += instance.OnJoystick;
+            @Joystick.performed += instance.OnJoystick;
+            @Joystick.canceled += instance.OnJoystick;
         }
 
         /// <summary>
@@ -916,12 +1356,24 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @Position.started -= instance.OnPosition;
             @Position.performed -= instance.OnPosition;
             @Position.canceled -= instance.OnPosition;
+            @UIScroll.started -= instance.OnUIScroll;
+            @UIScroll.performed -= instance.OnUIScroll;
+            @UIScroll.canceled -= instance.OnUIScroll;
             @Rotation.started -= instance.OnRotation;
             @Rotation.performed -= instance.OnRotation;
             @Rotation.canceled -= instance.OnRotation;
             @TrackingState.started -= instance.OnTrackingState;
             @TrackingState.performed -= instance.OnTrackingState;
             @TrackingState.canceled -= instance.OnTrackingState;
+            @Grip.started -= instance.OnGrip;
+            @Grip.performed -= instance.OnGrip;
+            @Grip.canceled -= instance.OnGrip;
+            @HapticDevice.started -= instance.OnHapticDevice;
+            @HapticDevice.performed -= instance.OnHapticDevice;
+            @HapticDevice.canceled -= instance.OnHapticDevice;
+            @Joystick.started -= instance.OnJoystick;
+            @Joystick.performed -= instance.OnJoystick;
+            @Joystick.canceled -= instance.OnJoystick;
         }
 
         /// <summary>
@@ -1101,6 +1553,34 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackingState(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Eye Gaze Position" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEyeGazePosition(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Eye Gaze Is Tracked" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEyeGazeIsTracked(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Eye Gaze Rotation" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEyeGazeRotation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Eye Gaze Tracking State" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEyeGazeTrackingState(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "RightController" which allows adding and removing callbacks.
@@ -1131,12 +1611,12 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackingState(InputAction.CallbackContext context);
         /// <summary>
-        /// Method invoked when associated input action "Grab" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "Grip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnGrab(InputAction.CallbackContext context);
+        void OnGrip(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "Aim Position" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
@@ -1151,6 +1631,20 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnAimRotation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "GripButton" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGripButton(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Haptic Device" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHapticDevice(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LeftController" which allows adding and removing callbacks.
@@ -1167,6 +1661,13 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPosition(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "UI Scroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUIScroll(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Rotation" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1180,6 +1681,27 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTrackingState(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Grip" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGrip(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Haptic Device" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHapticDevice(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Joystick" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnJoystick(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Player" which allows adding and removing callbacks.

@@ -86,8 +86,10 @@ MonoBehaviour:
   - {fileID: 8877177980677234388}
   m_StartingInteractionOverridesMap:
   - groupMember: {fileID: 4343660526480754339}
+    overrideGroupMembers: []
+  - groupMember: {fileID: 8877177980677234388}
     overrideGroupMembers:
-    - {fileID: 8877177980677234388}
+    - {fileID: 4343660526480754339}
 --- !u!114 &5967689310316253315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -269,8 +271,10 @@ MonoBehaviour:
   - {fileID: 1883230248363655243}
   m_StartingInteractionOverridesMap:
   - groupMember: {fileID: 2141651114331267770}
+    overrideGroupMembers: []
+  - groupMember: {fileID: 1883230248363655243}
     overrideGroupMembers:
-    - {fileID: 1883230248363655243}
+    - {fileID: 2141651114331267770}
 --- !u!114 &4238984354899526239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1923,6 +1927,10 @@ PrefabInstance:
       propertyPath: m_Handedness
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2417358720014700305, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4125421792874400280, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
       propertyPath: m_Name
       value: Poke Interactor
@@ -2177,6 +2185,10 @@ PrefabInstance:
     - target: {fileID: 2417358720014700305, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
       propertyPath: m_Handedness
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2417358720014700305, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4125421792874400280, guid: 27024f5809f4a4347b9cd7f26a1bdf93, type: 3}
       propertyPath: m_Name

@@ -10,11 +10,6 @@ public class StorageLetterGame : MiniGame
     public int CurrentTry { get => currentTry; set => currentTry = value; }
     public int MaxTry { get => currentTry; }
 
-    void Start()
-    {
-
-    }
-
     public override void StartGame()
     {
         base.StartGame();
@@ -23,10 +18,5 @@ public class StorageLetterGame : MiniGame
     public override void StopGame()
     {
         base.StopGame();
-    }
-
-    void Update()
-    {
-        
     }
 }

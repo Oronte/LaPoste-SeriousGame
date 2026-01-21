@@ -26,8 +26,6 @@ public class QuizDatabaseEditor : EditorWindow
 
         scroll = EditorGUILayout.BeginScrollView(scroll);
 
-        DrawGlobalColors();
-
         if(list == null)
         {
             SetupList();
@@ -36,19 +34,6 @@ public class QuizDatabaseEditor : EditorWindow
         list.DoLayoutList();
 
         EditorGUILayout.EndScrollView();
-    }
-
-    private void DrawGlobalColors()
-    {
-        EditorGUILayout.Space(5f);
-        EditorGUILayout.LabelField("Couleurs globales", EditorStyles.boldLabel);
-
-        database.ColorA = EditorGUILayout.ColorField("Couleur A", database.ColorA);
-        database.ColorB = EditorGUILayout.ColorField("Couleur B", database.ColorB);
-        database.ColorC = EditorGUILayout.ColorField("Couleur C", database.ColorC);
-        database.ColorD = EditorGUILayout.ColorField("Couleur D", database.ColorD);
-
-        EditorGUILayout.Space(5f);
     }
 
     private void SetupList()
@@ -62,7 +47,10 @@ public class QuizDatabaseEditor : EditorWindow
 
         list.elementHeightCallback = _index =>
         {
-            return EditorGUIUtility.singleLineHeight * 8 + 20;
+            QuizQuestion _question = database.questions[_index];
+            float _line = EditorGUIUtility.singleLineHeight;
+
+            return _line * 2 + (_question.answers.Count * (_line + 4)) + _line + 30;
         };
 
         list.drawElementCallback = (_rect, _index, active, _focused) =>
@@ -74,43 +62,62 @@ public class QuizDatabaseEditor : EditorWindow
             EditorGUI.LabelField(new Rect(_rect.x, _rect.y, 50, _line), $"ID: {_question.ID}");
             _question.QuestionText = EditorGUI.TextField(new Rect(_rect.x + 60, _rect.y, _rect.width - 60, _line), _question.QuestionText);
 
+
             _question.IsMultipleAnswers = EditorGUI.ToggleLeft(new Rect(_rect.x, _rect.y + _line + 4, _rect.width, _line), "Réponses multiples", _question.IsMultipleAnswers);
 
-            string[] _labels = { "A", "B", "C", "D" };
-            Color[] _colors = { database.ColorA, database.ColorB, database.ColorC, database.ColorD };
+            float _y = _rect.y + _line * 2 + 10;
 
-            for (int i = 0; i < 4; i++)
+
+            int _answerCount = _question.answers.Count;
+            for (int i = 0; i < _answerCount; i++)
             {
-                float _y = _rect.y + (i + 2) * (_line + 4);
+                QuizAnswer _answer = _question.answers[i];
 
-                EditorGUI.LabelField(new Rect(_rect.x, _y, 20, _line), _labels[i]);
-                _question.Answers[i].Text = EditorGUI.TextField(new Rect(_rect.x + 25, _y, _rect.width - 120, _line), _question.Answers[i].Text);
+                EditorGUI.BeginChangeCheck();
 
-                GUI.color = _colors[i];
-                bool _newValue = EditorGUI.Toggle(new Rect(_rect.x + _rect.width - 80, _y, 20, _line), _question.CorrectAnswers[i]);
-                GUI.color = Color.white;
+                _answer.Text = EditorGUI.TextField(new Rect(_rect.x, _y, _rect.width - 150, _line), _answer.Text);
 
-                if (_newValue != _question.CorrectAnswers[i])
+                _answer.AnswerColor = EditorGUI.ColorField(new Rect(_rect.x + _rect.width - 145, _y, 60, _line), _answer.AnswerColor);
+
+                bool _newCorrect = EditorGUI.Toggle(new Rect(_rect.x + _rect.width - 80, _y, 20, _line), _answer.IsCorrect);
+
+                if(EditorGUI.EndChangeCheck())
                 {
-                    Undo.RecordObject(database, "Modify Correct Answers");
+                    Undo.RecordObject(database, "Modify Answer");
 
-                    if (!_question.IsMultipleAnswers)
+                    if(_newCorrect && !_question.IsMultipleAnswers)
                     {
-                        for (int j = 0; j < 4; j++)
-                        { 
-                            _question.CorrectAnswers[j] = false;
+                        foreach(QuizAnswer _ans in _question.answers)
+                        {
+                            _ans.IsCorrect = false;
                         }
-
-                        _question.CorrectAnswers[i] = _newValue;
-                    }
-                    else
-                    {
-                        _question.CorrectAnswers[i] = _newValue;
                     }
 
+                    _answer.IsCorrect = _newCorrect;
                     EditorUtility.SetDirty(database);
                 }
+
+                if(GUI.Button(new Rect(_rect.x + _rect.width - 50, _y, 50, _line), "Suppr"))
+                {
+                    Undo.RecordObject(database, "Remove Answer");
+                    _question.answers.RemoveAt(i);
+                    EditorUtility.SetDirty(database);
+                    return;
+                }
+
+                _y += _line + 4;
             }
+
+            GUI.enabled = _answerCount < 4;
+
+            if(GUI.Button(new Rect(_rect.x, _y, 150, _line), "Ajouter une réponse"))
+            {
+                Undo.RecordObject(database, "Add Answer");
+                _question.answers.Add(new QuizAnswer());
+                EditorUtility.SetDirty(database);
+            }
+
+            GUI.enabled = true;
         };
 
         list.onAddCallback = _list =>
@@ -118,6 +125,7 @@ public class QuizDatabaseEditor : EditorWindow
             Undo.RecordObject(database, "Add Quiz Question");
             database.AddQuestion();
             database.RecalculateIDS();
+            EditorUtility.SetDirty(database);
         };
 
         list.onRemoveCallback = _list =>
@@ -125,12 +133,14 @@ public class QuizDatabaseEditor : EditorWindow
             Undo.RecordObject(database, "Remove Quiz Question");
             database.questions.RemoveAt(_list.index);
             database.RecalculateIDS();
+            EditorUtility.SetDirty(database);
         };
 
         list.onReorderCallback = _list =>
         {
             Undo.RecordObject(database, "Reorder Quiz Questions");
             database.RecalculateIDS();
+            EditorUtility.SetDirty(database);
         };
     }
 }

@@ -1,20 +1,19 @@
 using System;
+using System.Collections.Generic;
 
 [Serializable]
 public class QuizQuestion
 {
-    public int ID;
+    private int id;
+
     public string QuestionText;
+    public bool IsMultipleAnswers = false;
+    public List<QuizAnswer> answers = new List<QuizAnswer>();
 
-    public bool IsMultipleAnswers;
+    public int ID => id;
 
-    public QuizAnswer[] Answers = new QuizAnswer[4]
+    public void SetID(int _newID)
     {
-        new QuizAnswer(),
-        new QuizAnswer(),
-        new QuizAnswer(),
-        new QuizAnswer()
-    };
-
-    public bool[] CorrectAnswers = new bool[4];
+        id = _newID;
+    }
 }
