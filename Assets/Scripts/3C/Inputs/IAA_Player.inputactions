@@ -356,6 +356,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Teleport Mode",
+                    "type": "Value",
+                    "id": "65d41943-06d4-4608-a912-4ce2e7a4cc31",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -444,6 +453,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Haptic Device",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ed654eed-1004-47ae-8b1b-f5f448eab003",
+                    "path": "<XRController>{RightHand}/{Primary2DAxis}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Teleport Mode",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

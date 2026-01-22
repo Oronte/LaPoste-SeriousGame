@@ -3,6 +3,7 @@ Shader "Custom/BluredShader"
     Properties 
     {
         _BlurSize ("Blur Size", Float) = 0.005
+        _MainTex ("Texture", 2D) = "white" {}
     }
 
     SubShader
@@ -20,6 +21,7 @@ Shader "Custom/BluredShader"
             #pragma fragment frag
 
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+
 
             TEXTURE2D(_MainTex);
             SAMPLER(sampler_MainTex);

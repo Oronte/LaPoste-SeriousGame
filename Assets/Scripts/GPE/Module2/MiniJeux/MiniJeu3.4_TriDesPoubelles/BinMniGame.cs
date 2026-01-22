@@ -6,13 +6,12 @@ using UnityEngine;
 
 public class BinMniGame : MiniGame
 {
-    List<BinComponent> bins = new List<BinComponent>();
+    [SerializeField, VisibleAnywhereProperty] public List<BinComponent> bins = new List<BinComponent>();
     List<GarbageComponent> garbages = new List<GarbageComponent>();
     public override bool IsFinished => ComputePercentage() > 0.8f;
 
     void Start()
     {
-        bins = Resources.FindObjectsOfTypeAll<BinComponent>().ToList();
         garbages = Resources.FindObjectsOfTypeAll<GarbageComponent>().ToList();
     }
 

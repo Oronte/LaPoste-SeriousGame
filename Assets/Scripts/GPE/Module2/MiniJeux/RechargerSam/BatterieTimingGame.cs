@@ -35,9 +35,14 @@ public class BatterieTimingGame : MiniGame
 
 
     //internal variables for movement
-    float minMaxHeight = 0.0f;
-    bool invert = false;
+    bool canMove = false;
     Vector2 barPos = Vector2.zero;
+    float minMaxHeight = 0.0f;
+    [SerializeField, VisibleAnywhereProperty]
+    bool invert = false;
+    [SerializeField, VisibleAnywhereProperty]
+    bool isUp = false;
+
 
 
     //Component references
@@ -48,53 +53,64 @@ public class BatterieTimingGame : MiniGame
 
     //UI References
     [SerializeField, Tooltip("Reference vers le boitier du minijeu")]
-    Image container;
+    Image container = null;
     [SerializeField, Tooltip("Reference vers la barre rouge du minijeu")]
-    TB_RedBar redBar;
+    TB_RedBar redBar = null;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Init();
         feedback = GetComponent<TB_FeedbackComponent>();
         if (!feedback) return;
 
         feedback.PlaySound("Button Pop");
+
+        Init();
     }
 
     void Update()
     {
-        if (!IsRunning) return;
         MoveRedBar();
     }
 
     void Init()
     {
+        if (!container || !redBar) return;
+        redBar.Init();
+        if (!redBar.RedBarImage) return;
+
         // calculate the min and max height for the red bar movement
-        minMaxHeight = (container.rectTransform.rect.height / 2) ;
+        minMaxHeight = (container.rectTransform.rect.height / 2);
         barPos = redBar.RedBarImage.rectTransform.rect.position;
 
         //initialize the stop button
+        if (!stopButton) return;
         stopButton.Init(this);
+
+        //reset variables
+        isFinished = false;
+        cycleCount = 0;
+        Score = 0.0f;
+        canMove = true;
+
     }
 
     public override void StartGame()
     {
         base.StartGame();
-        //reset variables
-        isFinished = false;
-        cycleCount = 0;
-        Score = 0.0f;
+       
     }
 
     void OnBatteryFlat()
     {
+        canMove = false;
         isFinished = true;
     }
 
     void MoveRedBar()
     {
+        if (!canMove) return;
         //_midBarSize is the half size of the red bar
         float _midBarSize = redBar.RedBarImage.rectTransform.rect.height;
         //_pos is the current position of the red bar center
@@ -124,12 +140,20 @@ public class BatterieTimingGame : MiniGame
     {
         //if the red bar is out the bouds,
         //invert the movement direction and add one to the cycle count if it's at the max
-        if (_pos >= _max || _pos <= _min)
+        bool _outMax = _pos >= _max;
+        bool _outMin = _pos <= _min;
+
+        if (_outMax || _outMin)
         {
-            invert = !invert;
-            if(_pos >= _max)
+
+            invert = _outMax;
+            if (!isUp)
+            {
                 cycleCount++;
-            Debug.Log("Cycle Count: " + cycleCount);
+                Debug.Log("Cycle Count: " + cycleCount);
+            }
+
+            isUp = invert;
         }
     }
 
@@ -145,6 +169,12 @@ public class BatterieTimingGame : MiniGame
 
     public void StopRedBar(ActivateEventArgs _agrs)
     {
+        canMove = false;
+        CheckGoodZone();
+    }
 
+    void CheckGoodZone()
+    {
+        Debug.Log("Ca marche !!!");
     }
 }

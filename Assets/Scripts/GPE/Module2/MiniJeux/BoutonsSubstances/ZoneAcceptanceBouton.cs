@@ -10,44 +10,42 @@ public class ZoneAcceptanceBouton : MonoBehaviour
     public event Action OnEnterFail = null;
     public event Action OnExitFail = null;
 
-    [Header("Zones VR")]
-    [SerializeField] public Collider acceptZone = null;
-    [SerializeField] public Collider failZone = null;
+    [Header("References")]
+    [SerializeField] Collider acceptZone = null;
+    [SerializeField] Collider failZone = null;
 
     public bool IsInsideAcceptZone { get; private set; } = false;
     public bool IsInsideFailZone { get; private set; } = false;
 
     private void OnTriggerEnter(Collider _other)
     {
-        if(_other.bounds.Intersects(acceptZone.bounds))
+        if(_other == acceptZone)
         {
-            Debug.Log("Enter Success");
             IsInsideAcceptZone = true;
             OnEnterAccept?.Invoke();
+            Debug.Log("Enter Success");
         }
-
-        if(_other.bounds.Intersects(failZone.bounds))
+        else if(_other == failZone)
         {
-            Debug.Log("Enter Fail");
             IsInsideFailZone = true;
             OnEnterFail?.Invoke();
+            Debug.Log("Enter Fail");
         }
     }
 
     private void OnTriggerExit(Collider _other)
     {
-        if(IsInsideAcceptZone && !_other.bounds.Intersects(acceptZone.bounds))
+        if(_other == acceptZone)
         {
-            Debug.Log("Exit Success");
             IsInsideAcceptZone = false;
             OnExitAccept?.Invoke();
+            Debug.Log("Exit Success");
         }
-
-        if(IsInsideFailZone && ! _other.bounds.Intersects(failZone.bounds))
+        else if(_other == failZone)
         {
-            Debug.Log("Exit Fail");
             IsInsideFailZone = false;
             OnExitFail?.Invoke();
+            Debug.Log("Exit Fail");
         }
     }
 
@@ -57,7 +55,7 @@ public class ZoneAcceptanceBouton : MonoBehaviour
         Gizmos.color = Color.green;
         Gizmos.DrawWireCube(acceptZone.bounds.center, acceptZone.bounds.size);
 
-        if(!acceptZone) return;
+        if (!failZone) return;
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(failZone.bounds.center, failZone.bounds.size);
     }

@@ -22,16 +22,11 @@ public class TB_StopButton : MonoBehaviour
     public void Init(BatterieTimingGame _owner)
     {
         interactable = GetComponent<XRSimpleInteractable>();
-        interactable.activated.AddListener(_owner.StopRedBar);
-
         owner = _owner;
+        interactable.activated.AddListener(owner.StopRedBar);
+
+
 
     }
 
-
-    public void TestEvent(ActivateEventArgs _agrs)
-    {
-        Debug.Log("ca marche !");
-
-    }
 }

@@ -3,8 +3,15 @@ using System.Collections.Generic;
 
 public class BinComponent : MonoBehaviour
 {
+    BinMniGame miniGame = null;
     List<GarbageComponent> garbages = new List<GarbageComponent>();
     [SerializeField] bool canRecycle = false; 
+
+    void Start()
+    {
+        if (!miniGame) return;
+        miniGame.bins.Add(this);
+    }
 
     void OnTriggerEnter(Collider _other)
     {

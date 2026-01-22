@@ -704,10 +704,10 @@ GameObject:
   - component: {fileID: 1415155157}
   - component: {fileID: 1415155156}
   - component: {fileID: 1415155155}
-  - component: {fileID: 1415155154}
   - component: {fileID: 1415155160}
   - component: {fileID: 1415155162}
   - component: {fileID: 1415155163}
+  - component: {fileID: 1415155164}
   m_Layer: 0
   m_Name: BoutonTest
   m_TagString: Untagged
@@ -715,20 +715,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1415155154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1415155153}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 035ff9980067e5949a3826d62c9e83c5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceptZone: {fileID: 1654952438}
-  failZone: {fileID: 1923444911}
 --- !u!65 &1415155155
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -934,6 +920,20 @@ MonoBehaviour:
   m_ClampToMaxDistance: 1
   m_MaxDistance: 0.05
   m_PokeFilter: {fileID: 1415155162}
+--- !u!114 &1415155164
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1415155153}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 035ff9980067e5949a3826d62c9e83c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptZone: {fileID: 1654952438}
+  failZone: {fileID: 1923444911}
 --- !u!1 &1654952435
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,8 +961,8 @@ Transform:
   m_GameObject: {fileID: 1654952435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.406}
-  m_LocalScale: {x: 0.96367, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.395}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1415155158}
@@ -1296,7 +1296,7 @@ MonoBehaviour:
   isRunning: 0
   maxScore: 1
   score: 0
-  zone: {fileID: 1415155154}
+  zone: {fileID: 0}
   timeLimit: 60
 --- !u!1 &1923444908
 GameObject:
@@ -1325,9 +1325,9 @@ Transform:
   m_GameObject: {fileID: 1923444908}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.40600055}
-  m_LocalScale: {x: 3.3008, y: 3.423, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: -0.397}
+  m_LocalScale: {x: 5.9573407, y: 5.9573407, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1415155158}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

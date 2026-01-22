@@ -7,9 +7,13 @@ public class InputComponent : MonoBehaviour
     InputAction moveAction = null;
     InputAction rotateAction = null;
     InputAction interact = null;
+    InputAction leftHandPos = null;
+    InputAction rightHandPos = null;
     public InputAction MoveAction => moveAction;
     public InputAction RotateAction => rotateAction;
     public InputAction Interact => interact;
+    public InputAction LeftHandPos => leftHandPos;
+    public InputAction RightHandPos => rightHandPos;
 
 
 
@@ -23,10 +27,14 @@ public class InputComponent : MonoBehaviour
         moveAction = controls.Player.Move;
         rotateAction = controls.Player.Rotate;
         interact = controls.Player.Interact;
+        leftHandPos = controls.LeftController.Position;
+        rightHandPos = controls.RightController.Position;
 
         moveAction.Enable();
         rotateAction.Enable();
         interact.Enable();
+        leftHandPos.Enable();
+        rightHandPos.Enable();
     }
 
     private void OnDisable()
@@ -34,5 +42,7 @@ public class InputComponent : MonoBehaviour
         moveAction.Disable();
         rotateAction.Disable();
         interact.Disable();
+        leftHandPos.Disable();
+        rightHandPos.Disable();
     }
 }

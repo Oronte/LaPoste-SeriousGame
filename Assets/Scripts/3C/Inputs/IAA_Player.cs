@@ -442,6 +442,15 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Teleport Mode"",
+                    ""type"": ""Value"",
+                    ""id"": ""65d41943-06d4-4608-a912-4ce2e7a4cc31"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -530,6 +539,17 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Haptic Device"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ed654eed-1004-47ae-8b1b-f5f448eab003"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Teleport Mode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -828,6 +848,7 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         m_RightController_AimRotation = m_RightController.FindAction("Aim Rotation", throwIfNotFound: true);
         m_RightController_GripButton = m_RightController.FindAction("GripButton", throwIfNotFound: true);
         m_RightController_HapticDevice = m_RightController.FindAction("Haptic Device", throwIfNotFound: true);
+        m_RightController_TeleportMode = m_RightController.FindAction("Teleport Mode", throwIfNotFound: true);
         // LeftController
         m_LeftController = asset.FindActionMap("LeftController", throwIfNotFound: true);
         m_LeftController_Position = m_LeftController.FindAction("Position", throwIfNotFound: true);
@@ -1095,6 +1116,7 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_RightController_AimRotation;
     private readonly InputAction m_RightController_GripButton;
     private readonly InputAction m_RightController_HapticDevice;
+    private readonly InputAction m_RightController_TeleportMode;
     /// <summary>
     /// Provides access to input actions defined in input action map "RightController".
     /// </summary>
@@ -1138,6 +1160,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "RightController/HapticDevice".
         /// </summary>
         public InputAction @HapticDevice => m_Wrapper.m_RightController_HapticDevice;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/TeleportMode".
+        /// </summary>
+        public InputAction @TeleportMode => m_Wrapper.m_RightController_TeleportMode;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1188,6 +1214,9 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @HapticDevice.started += instance.OnHapticDevice;
             @HapticDevice.performed += instance.OnHapticDevice;
             @HapticDevice.canceled += instance.OnHapticDevice;
+            @TeleportMode.started += instance.OnTeleportMode;
+            @TeleportMode.performed += instance.OnTeleportMode;
+            @TeleportMode.canceled += instance.OnTeleportMode;
         }
 
         /// <summary>
@@ -1223,6 +1252,9 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @HapticDevice.started -= instance.OnHapticDevice;
             @HapticDevice.performed -= instance.OnHapticDevice;
             @HapticDevice.canceled -= instance.OnHapticDevice;
+            @TeleportMode.started -= instance.OnTeleportMode;
+            @TeleportMode.performed -= instance.OnTeleportMode;
+            @TeleportMode.canceled -= instance.OnTeleportMode;
         }
 
         /// <summary>
@@ -1656,6 +1688,13 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnHapticDevice(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Teleport Mode" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTeleportMode(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LeftController" which allows adding and removing callbacks.

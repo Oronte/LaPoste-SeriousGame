@@ -11,16 +11,14 @@ public class TB_RedBar : MonoBehaviour
 
     void Start()
     {
-        Init();
     }
 
     void Update()
     {
-        if (!redBarImage) return;
 
     }
 
-    protected virtual void Init()
+    public void Init()
     {
         redBarImage = GetComponent<Image>();
         RedBarImage.enabled = true;

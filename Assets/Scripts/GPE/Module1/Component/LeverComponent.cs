@@ -19,7 +19,6 @@ public class LeverComponent : MonoBehaviour, IEnabler
 
     [SerializeField] HingeJoint hinge;
     [SerializeField] XRGrabInteractable grabInteractable;
-    [SerializeField] float minValue = 0.0f, maxValue = 0.0f;
     [SerializeField, Range(0f, 1f)] float minTolerance = 0.1f, maxTolerance = 0.8f;
     [SerializeField] bool canMove = true;
     [SerializeField] List<GameObject> enablers = new List<GameObject>();
