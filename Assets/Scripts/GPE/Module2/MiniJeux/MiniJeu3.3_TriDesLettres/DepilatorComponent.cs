@@ -9,6 +9,13 @@ struct MailTypePercentage
     public float     percentage;
 }
 
+[System.Serializable]
+struct MailTypePrefab
+{
+    public MailType     type;
+    public GameObject   prefab;
+}
+
 public class DepilatorComponent : MonoBehaviour
 {
     // Movement info
@@ -20,12 +27,14 @@ public class DepilatorComponent : MonoBehaviour
     [SerializeField] float              maxSpawnRate;           // Maximum time (seconds) to spawn a mail 
     [SerializeField]
     List<MailTypePercentage>            percentages;            // List used to initialize the dictionary with the editor
+    [SerializeField]
+    List<MailTypePrefab>                prefabs;                // List used to initialize the dictionary with the editor
     [SerializeField] Vector3            minSpawnPosition;       // The min position where new mails will be spawned
     [SerializeField] Vector3            maxSpawnPosition;       // The max position where new mails will be spawned
     [SerializeField] Vector3            minSpawnRotation;       // The min rotation where new mails will be spawned
     [SerializeField] Vector3            maxSpawnRotation;       // The max rotation where new mails will be spawned
-    [SerializeField] GameObject         toSpawn;                // The gameobject that will be spawned
     Dictionary<MailType, float>         percentagesDictionary;  // Percentage of all types of mails
+    Dictionary<MailType, GameObject>    mailsPrefab;            // Mails that can be spawn
 
     // Timer info
     [VisibleAnywhereProperty] float     currentTime;
@@ -55,6 +64,11 @@ public class DepilatorComponent : MonoBehaviour
 
         foreach (MailTypePercentage _typePercentage in percentages)
             percentagesDictionary[_typePercentage.type] = _typePercentage.percentage;
+
+        mailsPrefab = new Dictionary<MailType, GameObject>();
+
+        foreach (MailTypePrefab _prefab in prefabs)
+            mailsPrefab[_prefab.type] = _prefab.prefab;
     }
 
     void Update()
@@ -113,10 +127,9 @@ public class DepilatorComponent : MonoBehaviour
 
     void SpawnMail()
     {
-        GameObject _go = Instantiate(toSpawn, GetRandomVectorInRange(minSpawnPosition, maxSpawnPosition), Quaternion.Euler(GetRandomVectorInRange(minSpawnRotation, maxSpawnRotation)));
-        MailComponent _component = _go.GetComponent<MailComponent>();
-        _component.Type = GetRandomType();
-        //AddToTreadmill(_component);
+        GameObject _go = Instantiate(mailsPrefab[GetRandomType()], 
+            GetRandomVectorInRange(minSpawnPosition, maxSpawnPosition), 
+            Quaternion.Euler(GetRandomVectorInRange(minSpawnRotation, maxSpawnRotation)));
     }
 
     public void AddToTreadmill(MailComponent _component)

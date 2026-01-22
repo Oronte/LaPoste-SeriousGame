@@ -44,6 +44,7 @@ public class PalletTruckMovementComponent : MonoBehaviour
 
     public void Brake()
     {
+        Debug.Log("Braking");
         // TODO
     }
 }

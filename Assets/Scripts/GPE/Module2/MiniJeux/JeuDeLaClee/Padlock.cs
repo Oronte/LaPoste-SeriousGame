@@ -18,13 +18,14 @@ public class Padlock : MonoBehaviour
     private void Start()
     {
         //Retarde l'apelle pour que la liste de mini jeu soit bien initialiser
-        Invoke(nameof(LateInit), 0.5f);
+        //Invoke(nameof(Init), 0.5f);
+        Init();
     }
 
     /// <summary>
     /// Initialise les variables
     /// </summary>
-    void LateInit()
+    void Init()
     {
         if (!GameManager.Instance) return;
         audioSource = GetComponent<AudioSource>();
@@ -34,6 +35,19 @@ public class Padlock : MonoBehaviour
         OnUnlock += FinishKeyGame;
         OnUnlock += PlayClickSound;
         OnUnlock += PlayParticlesUnlock;
+        if (!keyGame) return;
+        keyGame.CurrentPadlock = this;
+        OnUnlock += DisableKey;
+    }
+
+    /// <summary>
+    /// Appelle les fonctions pour désactiver la gravité et le fait d'intéragir avec la clé
+    /// </summary>
+    void DisableKey()
+    {
+        if (!keyGame || !keyGame.CurrentKey) return;
+        keyGame.CurrentKey.UpdateGravity(false);
+        keyGame.CurrentKey.UpdateGrabbable(false);
     }
 
     void PlayParticlesUnlock()

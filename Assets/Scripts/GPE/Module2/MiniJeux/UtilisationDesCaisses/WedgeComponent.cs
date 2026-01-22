@@ -30,6 +30,7 @@ public class WedgeComponent : MonoBehaviour
 
     public void Reset()
     {
+        enabled = true;
         isGrabbed = false;
         isRemoved = false;
         transform.position = defaultPosition;

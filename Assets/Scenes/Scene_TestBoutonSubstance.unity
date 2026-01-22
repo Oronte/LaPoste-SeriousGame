@@ -227,6 +227,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &274942485 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2141651114331267770, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 1667528425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0924bcaa9eb50df458a783ae0e2b59f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &274942486 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4343660526480754339, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+  m_PrefabInstance: {fileID: 1667528425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0924bcaa9eb50df458a783ae0e2b59f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &391181876
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,6 +956,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   acceptZone: {fileID: 1654952438}
   failZone: {fileID: 1923444911}
+  pokeInteractors:
+  - {fileID: 274942486}
+  - {fileID: 274942485}
 --- !u!1 &1654952435
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,7 +1321,7 @@ MonoBehaviour:
   isRunning: 0
   maxScore: 1
   score: 0
-  zone: {fileID: 0}
+  zone: {fileID: 1415155164}
   timeLimit: 60
 --- !u!1 &1923444908
 GameObject:

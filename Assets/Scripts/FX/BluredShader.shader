@@ -1,31 +1,30 @@
-Shader "Custom/BluredShader"
+Shader "Custom/SimpleBlurURP"
 {
     Properties 
     {
-        _BlurSize ("Blur Size", Float) = 0.005
-        _MainTex ("Texture", 2D) = "white" {}
+        _BlurSize ("Force du Flou", Range(0, 1)) = 0.5
     }
 
     SubShader
     {
-        Tags { "RenderPipeline"="UniversalRenderPipeline" }
+        Tags { "RenderPipeline"="UniversalRenderPipeline" "RenderType"="Opaque" }
+        ZWrite Off Cull Off
 
         Pass
         {
             Name "BlurPass"
 
             HLSLPROGRAM
-            float _BlurSize;
-
             #pragma vertex vert
             #pragma fragment frag
-
+            
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
+            #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl" 
 
+            float _BlurSize;
 
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
-
+            TEXTURE2D(_BlitTexture);
+            SAMPLER(sampler_BlitTexture);
 
             struct Attributes
             {
@@ -49,13 +48,17 @@ Shader "Custom/BluredShader"
 
             half4 frag (Varyings IN) : SV_Target
             {
-                float2 offset = float2(_BlurSize, 0);
+                float2 offX = float2(_BlurSize, 0);
+                float2 offY = float2(0, _BlurSize * _ScreenParams.x / _ScreenParams.y); 
 
-                half4 col = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv) * 0.4;
-                col += SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv + offset) * 0.3;
-                col += SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv - offset) * 0.3;
+                half4 col = SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv);
 
-                return col;
+                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv + offX);
+                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv - offX);
+                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv + offY);
+                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv - offY);
+
+                return col / 5.0;
             }
             ENDHLSL
         }

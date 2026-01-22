@@ -300,7 +300,19 @@ MonoBehaviour:
       m_Calls: []
   m_Activated:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2931270143439514361}
+        m_TargetAssemblyTypeName: QuizButton, Assembly-CSharp
+        m_MethodName: OnButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Deactivated:
     m_PersistentCalls:
       m_Calls: []
@@ -360,13 +372,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b4a0306a7043e64a913084e4587fd1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonFrame: {fileID: 7749160289081445638}
   button: {fileID: 8326778029617534127}
-  textButton: {fileID: 4950147953588343916}
-  frameColor: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
-  buttonColor: {r: 0, g: 0.5176468, b: 1, a: 1}
-  textColor: {r: 1, g: 1, b: 1, a: 1}
+  color: {r: 1, g: 1, b: 1, a: 1}
   text: 65
+  answer:
+    Text: 
+    IsCorrect: 0
+    AnswerColor: {r: 1, g: 1, b: 1, a: 1}
+  OnButtonActivated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &5270325246439560817
 GameObject:
   m_ObjectHideFlags: 0

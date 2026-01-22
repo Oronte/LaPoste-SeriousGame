@@ -20,6 +20,8 @@ public class LetterPileComponent : MonoBehaviour
     [Header("Debug", order = 2)]
     [SerializeField] bool useDebug = false;
 
+    [Header("Component Settings", order = 3)]
+    [SerializeField, VisibleAnywhereProperty] bool isGameOver = false;
     [SerializeField] Vector3 defaultPosition = Vector3.zero;
     [SerializeField] Quaternion defaultRotation = Quaternion.identity;
 
@@ -58,9 +60,12 @@ public class LetterPileComponent : MonoBehaviour
         transform.position = defaultPosition;
         transform.rotation = defaultRotation;
         progressBar.Activate = true;
+        isGameOver = false;
     }
+
     private void OnCollisionEnter(Collision _collision)
     {
+        if (isGameOver) return;
         //When a collision is trigger, check if it's the box to validate the position
         if (_collision.collider == ke7BoxCollider)
         {
@@ -74,6 +79,7 @@ public class LetterPileComponent : MonoBehaviour
 
     private void OnCollisionExit(Collision _collision)
     {
+        if (isGameOver) return;
         if (_collision.collider == ke7BoxCollider)
         {
             if (useDebug) Debug.Log("The pile is no longer in the trigger zone");
@@ -83,6 +89,7 @@ public class LetterPileComponent : MonoBehaviour
 
     void OnSelectEntered(SelectEnterEventArgs _args)
     {
+        if (isGameOver) return;
         //We assign firstHandSelect to the hand that just interacted. If first hand is already assigned,
         //then we assign second hand. If both are assigned, there is a problem...
         if (firstHandSelect == null)
@@ -104,6 +111,7 @@ public class LetterPileComponent : MonoBehaviour
 
     void OnSelectExited(SelectExitEventArgs _args)
     {
+        if (isGameOver) return;
         //We test if it was grab, if so then we drop everything.
         if (isGrabbed)
         {
@@ -130,5 +138,8 @@ public class LetterPileComponent : MonoBehaviour
     void OnMinValueReached()
     {
         if (useDebug) Debug.Log("Min value have been reached");
+        isGameOver = true;
+        grab.trackPosition = false;
+        grab.trackRotation= false;
     }
 }

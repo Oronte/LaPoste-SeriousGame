@@ -5,7 +5,12 @@ public class PalletTruck : MonoBehaviour
 {
     [SerializeField] LerpComponent lift;
     [SerializeField] float intensity;
-    [SerializeField] public bool Active { get; set; } = false;
+    [SerializeField, VisibleAnywhereProperty] bool active = false;
+    public bool Active
+    {
+        get => active;
+        set => active = value;
+    }
 
     void Start()
     {
@@ -13,5 +18,11 @@ public class PalletTruck : MonoBehaviour
 
     void Update()
     {
+    }
+
+    public void EmergencyStop()
+    {
+        Active = false;
+        Debug.Log("Emergency stop");
     }
 }

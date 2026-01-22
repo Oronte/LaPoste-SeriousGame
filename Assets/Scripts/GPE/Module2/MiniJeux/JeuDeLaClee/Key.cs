@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 [RequireComponent (typeof(AudioSource))]
 public class Key : MonoBehaviour
@@ -12,7 +14,19 @@ public class Key : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         if(!audioSource) audioSource = GetComponentInChildren<AudioSource>();
+        //Invoke(nameof(Init), 0.5f);
+        Init();
     }
+
+
+    void Init()
+    {
+        if (!GameManager.Instance) return;
+        KeyGame _keyGame = GameManager.Instance.GetMiniGame<KeyGame>();
+        if(!_keyGame) return;
+        _keyGame.CurrentKey = this;
+    }
+
     /// <summary>
     /// Lors de la collision dans une zone on verifie si la zone est une zone de deblocage de cadena
     /// </summary>
@@ -40,5 +54,24 @@ public class Key : MonoBehaviour
         if (!_padlock) return;
         audioSource.clip = missPadlockSound;
         audioSource.Play();
+    }
+    /// <summary>
+    /// Récupére le composant de gravité et desactive la gravité
+    /// </summary>
+    /// <param name="_isEnable">si la gravité doit etre activé ou non</param>
+    public void UpdateGravity(bool _isEnable)
+    {
+        if (!TryGetComponent<Rigidbody>(out Rigidbody _rb)) return;
+        _rb.useGravity = _isEnable;
+        _rb.isKinematic = !_isEnable;
+    }
+    /// <summary>
+    /// Récupére le composant de d'interaction et desactive l'interaction
+    /// </summary>
+    /// <param name="_isEnable">si l'interaction doit etre activé ou non</param>
+    public void UpdateGrabbable(bool _isEnable)
+    {
+        if (!TryGetComponent<XRGrabInteractable>(out XRGrabInteractable _grab)) return;
+        _grab.enabled = _isEnable;
     }
 }

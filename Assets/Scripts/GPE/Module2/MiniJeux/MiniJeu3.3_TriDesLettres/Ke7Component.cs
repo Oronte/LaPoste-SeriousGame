@@ -14,8 +14,8 @@ class MailPlacingInfo
 
 public class Ke7Component : MonoBehaviour
 {
-    List<MailComponent>                 mails;
-    List<MailPlacingInfo>               mailsToPlace;
+    List<MailComponent>                 mails = new List<MailComponent>();
+    List<MailPlacingInfo>               mailsToPlace = new List<MailPlacingInfo>();
     [SerializeField] Vector3            targetPos;
     [SerializeField] Vector3            targetRot;
     [SerializeField] Vector3            posOffset;
@@ -23,12 +23,6 @@ public class Ke7Component : MonoBehaviour
     [SerializeField] float              timeToPlace;
 
     [SerializeField] LetterSortMiniGame miniGame;
-
-    void Start()
-    {
-        mails = new List<MailComponent>();
-        mailsToPlace = new List<MailPlacingInfo>();
-    }
 
     bool ContainsMachinable()
     {
@@ -108,7 +102,8 @@ public class Ke7Component : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
 
-        for (int _index = 0; _index < maxLetterCount; _index++)
+        int _count = maxLetterCount - mails.Count;
+        for (int _index = 0; _index < _count; _index++)
             Gizmos.DrawWireSphere(targetPos + posOffset * _index, 0.1f);
 
         Gizmos.color = Color.white;

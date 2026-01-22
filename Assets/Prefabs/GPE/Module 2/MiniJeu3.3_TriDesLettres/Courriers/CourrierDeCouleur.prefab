@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7146155073460085589}
   - component: {fileID: 2234497073142105417}
   m_Layer: 0
-  m_Name: LetterTest
+  m_Name: CourrierDeCouleur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ab8c96fda771f9649a6a826dc4429154, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2421e935d3529a24c989aa63a3b8bec5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  type: 1
 --- !u!54 &7627967731372325547
 Rigidbody:
   m_ObjectHideFlags: 0

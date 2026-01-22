@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db60eaaa276d9594483b29099b7624f7, type: 3}
   m_Name: QuizDatabase
   m_EditorClassIdentifier: 
-  ColorA: {r: 1, g: 0, b: 0, a: 1}
-  ColorB: {r: 0, g: 1, b: 0, a: 1}
-  ColorC: {r: 0, g: 0, b: 1, a: 1}
-  ColorD: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
-  questions: []
+  questions:
+  - QuestionText: Quel est la vie ?
+    IsMultipleAnswers: 0
+    answers:
+    - Text: oui
+      IsCorrect: 1
+      AnswerColor: {r: 1, g: 1, b: 1, a: 1}
+    - Text: non
+      IsCorrect: 0
+      AnswerColor: {r: 1, g: 1, b: 1, a: 1}

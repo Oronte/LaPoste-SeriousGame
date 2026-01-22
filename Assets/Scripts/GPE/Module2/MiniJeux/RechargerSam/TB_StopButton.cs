@@ -23,10 +23,19 @@ public class TB_StopButton : MonoBehaviour
     {
         interactable = GetComponent<XRSimpleInteractable>();
         owner = _owner;
-        interactable.activated.AddListener(owner.StopRedBar);
 
+        Debug.Log("Init stop button");
 
+    }
 
+    public void StopRedBar()
+    {
+        if(!owner)
+        {
+            Debug.Log("NO OWNER !!");
+            return;
+        }
+        owner.StopRedBar();
     }
 
 }

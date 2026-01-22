@@ -24,10 +24,14 @@ public class GameManager : Singleton<GameManager>
     public MiniGame CurrentMiniGame => IsModuleFinished ? null : allMinigames[currentGame];
 
     public Player CurrentPlayer => currentPlayer;
+    protected override void Awake()
+    {
+        base.Awake();
+        InitMiniGames();
+    }
 
     void Start()
     {
-        InitMiniGames();
         InitPlayer();
         StartCurrentMiniGame();
     }

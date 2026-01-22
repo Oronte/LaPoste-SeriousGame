@@ -167,7 +167,7 @@ public class BatterieTimingGame : MiniGame
         }
     }
 
-    public void StopRedBar(ActivateEventArgs _agrs)
+    public void StopRedBar()
     {
         canMove = false;
         CheckGoodZone();

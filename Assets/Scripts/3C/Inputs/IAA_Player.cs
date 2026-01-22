@@ -153,6 +153,15 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Scale Toggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""a0e27404-ae7b-454b-a67a-85a4b33bc6e9"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -364,6 +373,17 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""action"": ""Eye Gaze Tracking State"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac2d8644-0770-4591-abb8-a201cde799b6"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxisClick}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Scale Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -448,6 +468,42 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""65d41943-06d4-4608-a912-4ce2e7a4cc31"",
                     ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Activate"",
+                    ""type"": ""Button"",
+                    ""id"": ""1d1c2bee-0c29-49e3-b999-4f9089da49a7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate Manipulation"",
+                    ""type"": ""Value"",
+                    ""id"": ""dd506ed3-1263-474f-a8f0-958b75c5482a"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Directional Manipulation"",
+                    ""type"": ""Value"",
+                    ""id"": ""9629487a-bbce-4622-ad95-edcae0916ffc"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Activate Value"",
+                    ""type"": ""Value"",
+                    ""id"": ""393e5fd1-1804-48d9-8f33-ce954095bee9"",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -546,10 +602,54 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""ed654eed-1004-47ae-8b1b-f5f448eab003"",
                     ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
-                    ""interactions"": """",
+                    ""interactions"": ""Sector(directions=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Teleport Mode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6a2ca664-c334-4d80-9631-443b0afce1db"",
+                    ""path"": ""<XRController>{RightHand}/{TriggerButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Activate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f00f2f1d-bea9-4a81-9ceb-545e71191508"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate Manipulation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7d5d0bc0-f421-498e-bd04-fd0e1d87e228"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Directional Manipulation"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""76afaee6-a8b0-437b-96e2-8204af5119d6"",
+                    ""path"": ""<XRController>{LeftHand}/{Trigger}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Activate Value"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -838,6 +938,7 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         m_Head_EyeGazeIsTracked = m_Head.FindAction("Eye Gaze Is Tracked", throwIfNotFound: true);
         m_Head_EyeGazeRotation = m_Head.FindAction("Eye Gaze Rotation", throwIfNotFound: true);
         m_Head_EyeGazeTrackingState = m_Head.FindAction("Eye Gaze Tracking State", throwIfNotFound: true);
+        m_Head_ScaleToggle = m_Head.FindAction("Scale Toggle", throwIfNotFound: true);
         // RightController
         m_RightController = asset.FindActionMap("RightController", throwIfNotFound: true);
         m_RightController_Position = m_RightController.FindAction("Position", throwIfNotFound: true);
@@ -849,6 +950,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         m_RightController_GripButton = m_RightController.FindAction("GripButton", throwIfNotFound: true);
         m_RightController_HapticDevice = m_RightController.FindAction("Haptic Device", throwIfNotFound: true);
         m_RightController_TeleportMode = m_RightController.FindAction("Teleport Mode", throwIfNotFound: true);
+        m_RightController_Activate = m_RightController.FindAction("Activate", throwIfNotFound: true);
+        m_RightController_RotateManipulation = m_RightController.FindAction("Rotate Manipulation", throwIfNotFound: true);
+        m_RightController_DirectionalManipulation = m_RightController.FindAction("Directional Manipulation", throwIfNotFound: true);
+        m_RightController_ActivateValue = m_RightController.FindAction("Activate Value", throwIfNotFound: true);
         // LeftController
         m_LeftController = asset.FindActionMap("LeftController", throwIfNotFound: true);
         m_LeftController_Position = m_LeftController.FindAction("Position", throwIfNotFound: true);
@@ -953,6 +1058,7 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_Head_EyeGazeIsTracked;
     private readonly InputAction m_Head_EyeGazeRotation;
     private readonly InputAction m_Head_EyeGazeTrackingState;
+    private readonly InputAction m_Head_ScaleToggle;
     /// <summary>
     /// Provides access to input actions defined in input action map "Head".
     /// </summary>
@@ -992,6 +1098,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Head/EyeGazeTrackingState".
         /// </summary>
         public InputAction @EyeGazeTrackingState => m_Wrapper.m_Head_EyeGazeTrackingState;
+        /// <summary>
+        /// Provides access to the underlying input action "Head/ScaleToggle".
+        /// </summary>
+        public InputAction @ScaleToggle => m_Wrapper.m_Head_ScaleToggle;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1039,6 +1149,9 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @EyeGazeTrackingState.started += instance.OnEyeGazeTrackingState;
             @EyeGazeTrackingState.performed += instance.OnEyeGazeTrackingState;
             @EyeGazeTrackingState.canceled += instance.OnEyeGazeTrackingState;
+            @ScaleToggle.started += instance.OnScaleToggle;
+            @ScaleToggle.performed += instance.OnScaleToggle;
+            @ScaleToggle.canceled += instance.OnScaleToggle;
         }
 
         /// <summary>
@@ -1071,6 +1184,9 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @EyeGazeTrackingState.started -= instance.OnEyeGazeTrackingState;
             @EyeGazeTrackingState.performed -= instance.OnEyeGazeTrackingState;
             @EyeGazeTrackingState.canceled -= instance.OnEyeGazeTrackingState;
+            @ScaleToggle.started -= instance.OnScaleToggle;
+            @ScaleToggle.performed -= instance.OnScaleToggle;
+            @ScaleToggle.canceled -= instance.OnScaleToggle;
         }
 
         /// <summary>
@@ -1117,6 +1233,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_RightController_GripButton;
     private readonly InputAction m_RightController_HapticDevice;
     private readonly InputAction m_RightController_TeleportMode;
+    private readonly InputAction m_RightController_Activate;
+    private readonly InputAction m_RightController_RotateManipulation;
+    private readonly InputAction m_RightController_DirectionalManipulation;
+    private readonly InputAction m_RightController_ActivateValue;
     /// <summary>
     /// Provides access to input actions defined in input action map "RightController".
     /// </summary>
@@ -1164,6 +1284,22 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "RightController/TeleportMode".
         /// </summary>
         public InputAction @TeleportMode => m_Wrapper.m_RightController_TeleportMode;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/Activate".
+        /// </summary>
+        public InputAction @Activate => m_Wrapper.m_RightController_Activate;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/RotateManipulation".
+        /// </summary>
+        public InputAction @RotateManipulation => m_Wrapper.m_RightController_RotateManipulation;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/DirectionalManipulation".
+        /// </summary>
+        public InputAction @DirectionalManipulation => m_Wrapper.m_RightController_DirectionalManipulation;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/ActivateValue".
+        /// </summary>
+        public InputAction @ActivateValue => m_Wrapper.m_RightController_ActivateValue;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1217,6 +1353,18 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @TeleportMode.started += instance.OnTeleportMode;
             @TeleportMode.performed += instance.OnTeleportMode;
             @TeleportMode.canceled += instance.OnTeleportMode;
+            @Activate.started += instance.OnActivate;
+            @Activate.performed += instance.OnActivate;
+            @Activate.canceled += instance.OnActivate;
+            @RotateManipulation.started += instance.OnRotateManipulation;
+            @RotateManipulation.performed += instance.OnRotateManipulation;
+            @RotateManipulation.canceled += instance.OnRotateManipulation;
+            @DirectionalManipulation.started += instance.OnDirectionalManipulation;
+            @DirectionalManipulation.performed += instance.OnDirectionalManipulation;
+            @DirectionalManipulation.canceled += instance.OnDirectionalManipulation;
+            @ActivateValue.started += instance.OnActivateValue;
+            @ActivateValue.performed += instance.OnActivateValue;
+            @ActivateValue.canceled += instance.OnActivateValue;
         }
 
         /// <summary>
@@ -1255,6 +1403,18 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @TeleportMode.started -= instance.OnTeleportMode;
             @TeleportMode.performed -= instance.OnTeleportMode;
             @TeleportMode.canceled -= instance.OnTeleportMode;
+            @Activate.started -= instance.OnActivate;
+            @Activate.performed -= instance.OnActivate;
+            @Activate.canceled -= instance.OnActivate;
+            @RotateManipulation.started -= instance.OnRotateManipulation;
+            @RotateManipulation.performed -= instance.OnRotateManipulation;
+            @RotateManipulation.canceled -= instance.OnRotateManipulation;
+            @DirectionalManipulation.started -= instance.OnDirectionalManipulation;
+            @DirectionalManipulation.performed -= instance.OnDirectionalManipulation;
+            @DirectionalManipulation.canceled -= instance.OnDirectionalManipulation;
+            @ActivateValue.started -= instance.OnActivateValue;
+            @ActivateValue.performed -= instance.OnActivateValue;
+            @ActivateValue.canceled -= instance.OnActivateValue;
         }
 
         /// <summary>
@@ -1624,6 +1784,13 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnEyeGazeTrackingState(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Scale Toggle" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnScaleToggle(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "RightController" which allows adding and removing callbacks.
@@ -1695,6 +1862,34 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTeleportMode(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Activate" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActivate(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Rotate Manipulation" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnRotateManipulation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Directional Manipulation" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDirectionalManipulation(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Activate Value" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnActivateValue(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LeftController" which allows adding and removing callbacks.

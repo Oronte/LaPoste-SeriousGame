@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1547427840037192928}
   - component: {fileID: 3090593022434152172}
   m_Layer: 0
-  m_Name: "Test d\xE9pilateur"
+  m_Name: Test depilateur
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
   maxSpawnRate: 2
   percentages:
   - type: 0
-    percentage: 5
+    percentage: 100
   - type: 1
     percentage: 5
   - type: 2
@@ -145,11 +145,27 @@ MonoBehaviour:
     percentage: 5
   - type: 7
     percentage: 5
+  prefabs:
+  - type: 0
+    prefab: {fileID: 7518724018586038506, guid: c4bc58d84e0deec42a49d4593f1b5439, type: 3}
+  - type: 1
+    prefab: {fileID: 7518724018586038506, guid: 2d02dcb1f2c01f4449450fae7d4cf11e, type: 3}
+  - type: 2
+    prefab: {fileID: 7518724018586038506, guid: 08081d05c982ed24a9f00e958208ff9d, type: 3}
+  - type: 3
+    prefab: {fileID: 7518724018586038506, guid: 0f7c1be8cfef93644ae532b78eae519a, type: 3}
+  - type: 4
+    prefab: {fileID: 7518724018586038506, guid: b8c0c89f42ac6a646a7d09f4a03c5cbb, type: 3}
+  - type: 5
+    prefab: {fileID: 7518724018586038506, guid: e8bc7997a980bcc44b1856535bba8480, type: 3}
+  - type: 6
+    prefab: {fileID: 7518724018586038506, guid: d4c375ac31bdbd84080ce950e0530648, type: 3}
+  - type: 7
+    prefab: {fileID: 7518724018586038506, guid: 55b0ff402e8132c4fb31d58af48d839c, type: 3}
   minSpawnPosition: {x: 1.9, y: 0.55, z: -0.35}
   maxSpawnPosition: {x: 1.9, y: 0.55, z: 0.35}
   minSpawnRotation: {x: 0, y: 0, z: 0}
   maxSpawnRotation: {x: 0, y: 360, z: 0}
-  toSpawn: {fileID: 7518724018586038506, guid: c4bc58d84e0deec42a49d4593f1b5439, type: 3}
 --- !u!1 &5316687985097764362
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc169d91c7809d14382564e8f53eddff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  miniGame: {fileID: 0}
 --- !u!1 &8527030014749327920
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,3 +365,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc169d91c7809d14382564e8f53eddff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  miniGame: {fileID: 0}
