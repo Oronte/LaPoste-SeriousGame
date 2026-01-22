@@ -64,8 +64,6 @@ public class BatterieTimingGame : MiniGame
         feedback = GetComponent<TB_FeedbackComponent>();
         if (!feedback) return;
 
-        feedback.PlaySound("Button Pop");
-
         Init();
     }
 
@@ -106,15 +104,16 @@ public class BatterieTimingGame : MiniGame
     {
         canMove = false;
         isFinished = true;
+        feedback.PlaySound(feedback.CourtCircuitSon);
     }
 
     void MoveRedBar()
     {
         if (!canMove) return;
-        //_midBarSize is the half size of the red bar
-        float _midBarSize = redBar.RedBarImage.rectTransform.rect.height;
+
+        float _barSize = redBar.RedBarImage.rectTransform.rect.height;
         //_pos is the current position of the red bar center
-        float _pos = redBar.RedBarImage.rectTransform.localPosition.y - (invert ? _midBarSize : 0) ;
+        float _pos = redBar.RedBarImage.rectTransform.localPosition.y - (invert ? _barSize : 0) ;
 
         //_min and _max are the limits of the movement
         float _min = barPos.y + minMaxHeight * -1.0f;
@@ -145,7 +144,6 @@ public class BatterieTimingGame : MiniGame
 
         if (_outMax || _outMin)
         {
-
             invert = _outMax;
             if (!isUp)
             {
@@ -153,6 +151,10 @@ public class BatterieTimingGame : MiniGame
                 Debug.Log("Cycle Count: " + cycleCount);
             }
 
+            if(isUp != invert)
+            {
+                feedback.PlaySound(feedback.BarreBipSon);
+            }
             isUp = invert;
         }
     }
@@ -167,14 +169,45 @@ public class BatterieTimingGame : MiniGame
         }
     }
 
-    public void StopRedBar()
+    public void StopEvent()
     {
-        canMove = false;
-        CheckGoodZone();
+        Invoke(nameof(StopRedBar), reactionDelay * 0.001f);
     }
 
-    void CheckGoodZone()
+    void StopRedBar()
     {
-        Debug.Log("Ca marche !!!");
+        /*bool _isIn = */CheckGoodZone();
+        canMove = false;
+        feedback.PlaySound(feedback.ErreurSon);
+        
     }
+
+    bool CheckGoodZone()
+    {
+
+        float _min = barPos.y + minMaxHeight * -1.0f;
+        float _maxCase = barPos.y + minMaxHeight;
+
+        float _goodZoneMin = barPos.y + minMaxHeight * -1.0f;
+        float _totalSize = _maxCase - _goodZoneMin;
+        float _offset = _totalSize / 10.0f;
+
+        float _goodZoneMax = _goodZoneMin + _offset;
+
+        float _barSize = redBar.RedBarImage.rectTransform.rect.height;
+        float _pos = redBar.RedBarImage.rectTransform.localPosition.y - (invert ? _barSize : 0);
+        if (_pos <= _goodZoneMax && _pos >= _goodZoneMin)
+        {
+            Debug.Log("T'es dedans !!");
+            return true;
+        }
+        else
+        {
+            Debug.Log("T'es PAS dedans !!");
+            return false;
+        }
+
+    }
+
+   
 }

@@ -13,12 +13,6 @@ public class TB_StopButton : MonoBehaviour
     {
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Init(BatterieTimingGame _owner)
     {
         interactable = GetComponent<XRSimpleInteractable>();
@@ -26,16 +20,17 @@ public class TB_StopButton : MonoBehaviour
 
         Debug.Log("Init stop button");
 
+
     }
 
-    public void StopRedBar()
+    public void CallStopRedBarEvent()
     {
         if(!owner)
         {
             Debug.Log("NO OWNER !!");
             return;
         }
-        owner.StopRedBar();
+        owner.StopEvent();
     }
 
 }

@@ -1,32 +1,29 @@
-using NUnit.Framework.Internal;
 using System;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
-using UnityEngine.Profiling;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
+[RequireComponent(typeof(HingeJoint), typeof(XRGrabInteractable))]
 public class LeverComponent : MonoBehaviour, IEnabler
 {
 
     public event Action onPulling = null;
     public event Action onResting = null;
-    public event Action onMinAngle= null;
+    public event Action onMinAngle = null;
     public event Action onMaxAngle = null;
 
 
     [SerializeField] HingeJoint hinge;
     [SerializeField] XRGrabInteractable grabInteractable;
     [SerializeField, Range(0f, 1f)] float minTolerance = 0.1f, maxTolerance = 0.8f;
-    [SerializeField] bool canMove = true;
     [SerializeField] List<GameObject> enablers = new List<GameObject>();
 
     JointLimits limits;
     JointSpring spring;
-    bool useLimit = true, useMotor = false;
-    bool isSettle = false;
+    bool useLimit = true, useMotor = false, isSettle = false;
+
+    // Interface implementation 
+    [SerializeField] public bool IsEnable { get; set; } = true;
 
     public float ComputeAngleToPourcentage(float angle)
     {
@@ -36,7 +33,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
     private void Start()
     {
         grabInteractable = GetComponent<XRGrabInteractable>();
-        if(grabInteractable == null)
+        if (grabInteractable == null)
             Debug.Log("Error Levier Component: No XRGrabInteractable found");
 
         hinge = GetComponent<HingeJoint>();
@@ -46,14 +43,14 @@ public class LeverComponent : MonoBehaviour, IEnabler
         spring = hinge.spring;
         useLimit = hinge.useLimits;
         useMotor = hinge.useMotor;
-        UpdateCanMove(canMove);
+        UpdateCanMove(IsEnable);
 
     }
 
 
     private void Update()
     {
-        if (!canMove || !hinge) return;
+        if (!IsEnable || !hinge) return;
 
         float _angleInPourcentage = ComputeAngleToPourcentage(hinge.angle);
 
@@ -81,7 +78,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
             return;
         }
 
-        if(isSettle && _angleInPourcentage >= minTolerance && _angleInPourcentage <= maxTolerance)
+        if (isSettle && _angleInPourcentage >= minTolerance && _angleInPourcentage <= maxTolerance)
         {
             Debug.Log("Resting");
             onResting?.Invoke();
@@ -93,8 +90,8 @@ public class LeverComponent : MonoBehaviour, IEnabler
     public void UpdateCanMove(bool _canMoveState)
     {
         if (!grabInteractable) return;
-        canMove = _canMoveState;
-        if (canMove)
+        IsEnable = _canMoveState;
+        if (IsEnable)
             Enable();
         else
             Disable();
@@ -114,7 +111,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
         hinge.useLimits = useLimit;
         hinge.useMotor = useMotor;
         grabInteractable.enabled = true;
-        canMove = true;
+        IsEnable = true;
     }
 
 
@@ -127,7 +124,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
         Destroy(hinge);
         hinge = null;
         grabInteractable.enabled &= false;
-        canMove = true;
+        IsEnable = true;
     }
 
     //private void ToSnap(float _angleToSnap)

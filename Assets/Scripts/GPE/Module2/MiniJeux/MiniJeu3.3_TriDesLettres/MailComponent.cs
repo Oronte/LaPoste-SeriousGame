@@ -18,7 +18,18 @@ public enum MailType
 public class MailComponent : MonoBehaviour
 {
     [SerializeField] MailType type;
+    AudioSource audio = null;
 
     public MailType           Type => type;
     public bool               IsMachinable => type == MailType.Machinable;
+
+    private void Start()
+    {
+        audio = GetComponent<AudioSource>();
+    }
+
+    private void OnCollisionEnter(Collision _collision)
+    {
+        audio.Play();
+    }
 }

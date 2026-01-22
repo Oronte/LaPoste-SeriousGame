@@ -12,6 +12,11 @@ public class PalletTruckMovementComponent : MonoBehaviour
     public float maxAngle = 30.0f;
     public float tolerance = 10.0f;
 
+    /// <summary>
+    /// Is vehicle going forward or backwards
+    /// </summary>
+    public bool Forward { get; set; } = true;
+
     private void Start()
     {
         rearWheel.steerAngle = 90.0f;

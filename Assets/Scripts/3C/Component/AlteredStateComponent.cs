@@ -1,7 +1,10 @@
+using Dreamteck.Splines;
 using System;
 using System.ComponentModel;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class AlteredStateComponent : MonoBehaviour
 {
@@ -28,6 +31,7 @@ public class AlteredStateComponent : MonoBehaviour
 
     [SerializeField] bool useLatence = false;
     [SerializeField] float maxDistancedDelta = 0.0f;
+    [SerializeField] float tolerance = 0.01f;
     [SerializeField, VisibleAnywhereProperty] Transform rootRightParent = null;
     [SerializeField, VisibleAnywhereProperty] Transform rootLeftParent = null;
 
@@ -38,7 +42,7 @@ public class AlteredStateComponent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (useShaking)
         {
@@ -88,7 +92,8 @@ public class AlteredStateComponent : MonoBehaviour
     void Latence()
     {
         if (!useLatence) return;
-        rootLeft.position = Vector3.MoveTowards(rootLeft.position, rootLeftParent.position, maxDistancedDelta);
+        if(Vector3.Distance(rootLeft.position, rootLeftParent.position) > tolerance)
+            rootLeft.position = Vector3.MoveTowards(rootLeft.position, rootLeftParent.position, maxDistancedDelta);
     }
 
     void ComputeNewOffset()

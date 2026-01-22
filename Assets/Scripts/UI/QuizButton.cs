@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.XR.Interaction.Toolkit.Filtering;
 
 public class QuizButton : MonoBehaviour
 {
     [Header("References", order = 0)]
     [SerializeField] GameObject button;
+    [SerializeField] XRPokeFilter pokeFilter = null;
 
     [Header("Config", order = 1)]
-    [SerializeField] Color color = Color.red;
     [SerializeField] string text = "A";
     [SerializeField] QuizAnswer answer = null;
     public UnityEvent<QuizButton> OnButtonActivated;
@@ -17,22 +18,32 @@ public class QuizButton : MonoBehaviour
     {
         answer = _answer;
     }
+
     public QuizAnswer GetAnswer() => answer;
 
     void Start()
     {
-        Setup(color, text);
-        SetButtonColor(color);
+        SetButtonColor(Color.white);
+        if(!pokeFilter)
+            pokeFilter = GetComponent<XRPokeFilter>();
     }
 
-    public void Setup(Color _color, string _text)
+    public void DisableButton(bool _shouldBlackButton)
     {
-        //if (button) 
+        if(_shouldBlackButton)
+            SetButtonColor(Color.black);
+        if (!pokeFilter)
+            return;
+        pokeFilter.enabled = false;
     }
 
     public void ResetState()
     {
-
+        SetButtonColor(Color.white);
+        if (!pokeFilter)
+            return;
+        pokeFilter.enabled = true;
+        answer = null;
     }
 
     public void OnButtonPressed()

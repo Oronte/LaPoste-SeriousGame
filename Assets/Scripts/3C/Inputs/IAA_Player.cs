@@ -392,6 +392,42 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             ""id"": ""512c3da4-2edc-4e13-b061-64b616f9bb16"",
             ""actions"": [
                 {
+                    ""name"": ""UI Press"",
+                    ""type"": ""Button"",
+                    ""id"": ""cf002540-fc72-419d-9f22-336ddc5781d5"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Snap Turn"",
+                    ""type"": ""Value"",
+                    ""id"": ""00ef8689-fc37-40b9-8398-4a979c708898"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Turn"",
+                    ""type"": ""Value"",
+                    ""id"": ""50ff2fb6-7c9a-406e-ae7e-b3e15510e161"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UI Scroll"",
+                    ""type"": ""Value"",
+                    ""id"": ""9af715a4-4f84-485d-9551-48634ec1c528"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": ""InvertVector2(invertY=false)"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
                     ""name"": ""Position"",
                     ""type"": ""Value"",
                     ""id"": ""10e57a7e-a926-4940-a1ad-af442ca041ad"",
@@ -507,9 +543,95 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Teleport Mode Cancel"",
+                    ""type"": ""Button"",
+                    ""id"": ""ef95501e-37e0-4008-ba54-de7e27ba1d6e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4b33163c-d151-479f-aceb-93fe3ebe65f5"",
+                    ""path"": ""<XRController>{RightHand}/{TriggerButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UI Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0677b00f-7926-4628-a826-8af6c3caea85"",
+                    ""path"": ""<MetaAimHand>{RightHand}/indexPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UI Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a88ca89d-e7b1-4dc1-a683-45ec6304670b"",
+                    ""path"": ""<HandInteraction>{RightHand}/pointerActivated"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UI Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ee09d2b6-a5fe-4ce9-adb1-268ad34bde42"",
+                    ""path"": ""<HoloLensHand>{RightHand}/selectPressed"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UI Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6c7b4ab2-5d99-4d23-baf4-c544d06db63e"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
+                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Snap Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""118cf15e-27a1-4d51-ad0f-35ce64467041"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
+                    ""interactions"": ""Sector(directions=12,sweepBehavior=1),Sector(directions=2,sweepBehavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Turn"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ef2ae7a1-ca67-498a-af26-b9d959579c7a"",
+                    ""path"": ""<XRController>{RightHand}/{Primary2DAxis}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UI Scroll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
                 {
                     ""name"": """",
                     ""id"": ""11e6f105-cf1c-4715-9040-47c8a79a1673"",
@@ -650,6 +772,17 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Activate Value"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d415830b-9903-45ac-aa09-16470ec6208f"",
+                    ""path"": ""<XRController>{RightHand}/{GripButton}"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Teleport Mode Cancel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -941,6 +1074,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         m_Head_ScaleToggle = m_Head.FindAction("Scale Toggle", throwIfNotFound: true);
         // RightController
         m_RightController = asset.FindActionMap("RightController", throwIfNotFound: true);
+        m_RightController_UIPress = m_RightController.FindAction("UI Press", throwIfNotFound: true);
+        m_RightController_SnapTurn = m_RightController.FindAction("Snap Turn", throwIfNotFound: true);
+        m_RightController_Turn = m_RightController.FindAction("Turn", throwIfNotFound: true);
+        m_RightController_UIScroll = m_RightController.FindAction("UI Scroll", throwIfNotFound: true);
         m_RightController_Position = m_RightController.FindAction("Position", throwIfNotFound: true);
         m_RightController_Rotation = m_RightController.FindAction("Rotation", throwIfNotFound: true);
         m_RightController_TrackingState = m_RightController.FindAction("Tracking State", throwIfNotFound: true);
@@ -954,6 +1091,7 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         m_RightController_RotateManipulation = m_RightController.FindAction("Rotate Manipulation", throwIfNotFound: true);
         m_RightController_DirectionalManipulation = m_RightController.FindAction("Directional Manipulation", throwIfNotFound: true);
         m_RightController_ActivateValue = m_RightController.FindAction("Activate Value", throwIfNotFound: true);
+        m_RightController_TeleportModeCancel = m_RightController.FindAction("Teleport Mode Cancel", throwIfNotFound: true);
         // LeftController
         m_LeftController = asset.FindActionMap("LeftController", throwIfNotFound: true);
         m_LeftController_Position = m_LeftController.FindAction("Position", throwIfNotFound: true);
@@ -1224,6 +1362,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     // RightController
     private readonly InputActionMap m_RightController;
     private List<IRightControllerActions> m_RightControllerActionsCallbackInterfaces = new List<IRightControllerActions>();
+    private readonly InputAction m_RightController_UIPress;
+    private readonly InputAction m_RightController_SnapTurn;
+    private readonly InputAction m_RightController_Turn;
+    private readonly InputAction m_RightController_UIScroll;
     private readonly InputAction m_RightController_Position;
     private readonly InputAction m_RightController_Rotation;
     private readonly InputAction m_RightController_TrackingState;
@@ -1237,6 +1379,7 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     private readonly InputAction m_RightController_RotateManipulation;
     private readonly InputAction m_RightController_DirectionalManipulation;
     private readonly InputAction m_RightController_ActivateValue;
+    private readonly InputAction m_RightController_TeleportModeCancel;
     /// <summary>
     /// Provides access to input actions defined in input action map "RightController".
     /// </summary>
@@ -1248,6 +1391,22 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
         public RightControllerActions(@IAA_Player wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/UIPress".
+        /// </summary>
+        public InputAction @UIPress => m_Wrapper.m_RightController_UIPress;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/SnapTurn".
+        /// </summary>
+        public InputAction @SnapTurn => m_Wrapper.m_RightController_SnapTurn;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/Turn".
+        /// </summary>
+        public InputAction @Turn => m_Wrapper.m_RightController_Turn;
+        /// <summary>
+        /// Provides access to the underlying input action "RightController/UIScroll".
+        /// </summary>
+        public InputAction @UIScroll => m_Wrapper.m_RightController_UIScroll;
         /// <summary>
         /// Provides access to the underlying input action "RightController/Position".
         /// </summary>
@@ -1301,6 +1460,10 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @ActivateValue => m_Wrapper.m_RightController_ActivateValue;
         /// <summary>
+        /// Provides access to the underlying input action "RightController/TeleportModeCancel".
+        /// </summary>
+        public InputAction @TeleportModeCancel => m_Wrapper.m_RightController_TeleportModeCancel;
+        /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
         public InputActionMap Get() { return m_Wrapper.m_RightController; }
@@ -1326,6 +1489,18 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_RightControllerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_RightControllerActionsCallbackInterfaces.Add(instance);
+            @UIPress.started += instance.OnUIPress;
+            @UIPress.performed += instance.OnUIPress;
+            @UIPress.canceled += instance.OnUIPress;
+            @SnapTurn.started += instance.OnSnapTurn;
+            @SnapTurn.performed += instance.OnSnapTurn;
+            @SnapTurn.canceled += instance.OnSnapTurn;
+            @Turn.started += instance.OnTurn;
+            @Turn.performed += instance.OnTurn;
+            @Turn.canceled += instance.OnTurn;
+            @UIScroll.started += instance.OnUIScroll;
+            @UIScroll.performed += instance.OnUIScroll;
+            @UIScroll.canceled += instance.OnUIScroll;
             @Position.started += instance.OnPosition;
             @Position.performed += instance.OnPosition;
             @Position.canceled += instance.OnPosition;
@@ -1365,6 +1540,9 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @ActivateValue.started += instance.OnActivateValue;
             @ActivateValue.performed += instance.OnActivateValue;
             @ActivateValue.canceled += instance.OnActivateValue;
+            @TeleportModeCancel.started += instance.OnTeleportModeCancel;
+            @TeleportModeCancel.performed += instance.OnTeleportModeCancel;
+            @TeleportModeCancel.canceled += instance.OnTeleportModeCancel;
         }
 
         /// <summary>
@@ -1376,6 +1554,18 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="RightControllerActions" />
         private void UnregisterCallbacks(IRightControllerActions instance)
         {
+            @UIPress.started -= instance.OnUIPress;
+            @UIPress.performed -= instance.OnUIPress;
+            @UIPress.canceled -= instance.OnUIPress;
+            @SnapTurn.started -= instance.OnSnapTurn;
+            @SnapTurn.performed -= instance.OnSnapTurn;
+            @SnapTurn.canceled -= instance.OnSnapTurn;
+            @Turn.started -= instance.OnTurn;
+            @Turn.performed -= instance.OnTurn;
+            @Turn.canceled -= instance.OnTurn;
+            @UIScroll.started -= instance.OnUIScroll;
+            @UIScroll.performed -= instance.OnUIScroll;
+            @UIScroll.canceled -= instance.OnUIScroll;
             @Position.started -= instance.OnPosition;
             @Position.performed -= instance.OnPosition;
             @Position.canceled -= instance.OnPosition;
@@ -1415,6 +1605,9 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
             @ActivateValue.started -= instance.OnActivateValue;
             @ActivateValue.performed -= instance.OnActivateValue;
             @ActivateValue.canceled -= instance.OnActivateValue;
+            @TeleportModeCancel.started -= instance.OnTeleportModeCancel;
+            @TeleportModeCancel.performed -= instance.OnTeleportModeCancel;
+            @TeleportModeCancel.canceled -= instance.OnTeleportModeCancel;
         }
 
         /// <summary>
@@ -1800,6 +1993,34 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
     public interface IRightControllerActions
     {
         /// <summary>
+        /// Method invoked when associated input action "UI Press" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUIPress(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Snap Turn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnSnapTurn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Turn" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTurn(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "UI Scroll" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUIScroll(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Position" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1890,6 +2111,13 @@ public partial class @IAA_Player: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnActivateValue(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Teleport Mode Cancel" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTeleportModeCancel(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "LeftController" which allows adding and removing callbacks.

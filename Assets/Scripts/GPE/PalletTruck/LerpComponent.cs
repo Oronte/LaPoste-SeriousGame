@@ -17,8 +17,8 @@ public class LerpComponent : MonoBehaviour
 
     private void Start()
     {
-        targetPos = GetSocket(isFirst).position;
-        basePos = GetSocket(!isFirst).position;
+        targetPos = GetSocket(!isFirst).position;
+        basePos = GetSocket(isFirst).position;
     }
 
     public void StartLerp()
@@ -28,6 +28,20 @@ public class LerpComponent : MonoBehaviour
         isLerping = true;
 
     }
+
+
+    public void LerpToFirst() => InternalLerpWrapper(true);
+
+    public void LerpToSecond() => InternalLerpWrapper(false);
+
+    private void InternalLerpWrapper(bool _toFirst)
+    {
+        targetPos = GetSocket(_toFirst).position;
+        basePos = GetSocket(!_toFirst).position;
+
+        StartLerp();
+    }
+
 
     private void Update()
     {
@@ -70,6 +84,6 @@ public class LerpComponent : MonoBehaviour
         }
     }
 
-    private Transform GetSocket(bool _first) => _first ? secondSocket : firstSocket;
+    private Transform GetSocket(bool _first) => _first ? firstSocket : secondSocket;
 
 }

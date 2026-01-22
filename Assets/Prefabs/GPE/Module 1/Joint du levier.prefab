@@ -50,11 +50,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hinge: {fileID: 0}
   grabInteractable: {fileID: 0}
-  minValue: 0
-  maxValue: 0
   minTolerance: 0.05
   maxTolerance: 0.95
-  canMove: 1
   enablers: []
 --- !u!54 &3022981988120202044
 Rigidbody:
@@ -272,8 +269,8 @@ Transform:
   m_GameObject: {fileID: 8680099528520630411}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071065, y: -0, z: -0, w: 0.7071071}
-  m_LocalPosition: {x: 0, y: -0, z: 0.527}
-  m_LocalScale: {x: 0.05, y: 1, z: 0.05}
+  m_LocalPosition: {x: 0, y: 0, z: 0.309}
+  m_LocalScale: {x: 0.05, y: 0.5, z: 0.05}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5286343295720973781}

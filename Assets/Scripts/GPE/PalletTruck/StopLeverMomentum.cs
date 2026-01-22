@@ -5,7 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 public class StopLeverMomentum : MonoBehaviour
 {
     private Rigidbody rb;
-    private XRGrabInteractable grabInteractable;
+    public XRGrabInteractable grabInteractable;
 
     void Awake()
     {
@@ -15,14 +15,23 @@ public class StopLeverMomentum : MonoBehaviour
 
     void OnEnable()
     {
-        grabInteractable.selectEntered.AddListener(OnGrab);
-        grabInteractable.selectExited.AddListener(OnRelease);
+        if (grabInteractable == null)
+            grabInteractable = GetComponent<XRGrabInteractable>();
+
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.AddListener(OnGrab);
+            grabInteractable.selectExited.AddListener(OnRelease);
+        }
     }
 
     void OnDisable()
     {
-        grabInteractable.selectEntered.RemoveListener(OnGrab);
-        grabInteractable.selectExited.RemoveListener(OnRelease);
+        if (grabInteractable != null)
+        {
+            grabInteractable.selectEntered.RemoveListener(OnGrab);
+            grabInteractable.selectExited.RemoveListener(OnRelease);
+        }
     }
 
     private void OnGrab(SelectEnterEventArgs args)
@@ -32,13 +41,19 @@ public class StopLeverMomentum : MonoBehaviour
 
     private void OnRelease(SelectExitEventArgs args)
     {
-        rb.freezeRotation = true;
-        float _currentAngle = transform.localEulerAngles.z;
         rb.linearVelocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
 
+        rb.freezeRotation = true;
+
+        float _currentAngle = transform.localEulerAngles.z;
         if (_currentAngle > 180.0f) _currentAngle -= 360.0f;
 
-        if (_currentAngle < 5.0f && _currentAngle > -5.0f) transform.localEulerAngles = new Vector3(0f, 0f, 0f);
+        if (Mathf.Abs(_currentAngle) < 10.0f)
+        {
+            Vector3 _targetRotation = transform.localEulerAngles;
+            _targetRotation.z = 0;
+            transform.localEulerAngles = _targetRotation;
+        }
     }
 }

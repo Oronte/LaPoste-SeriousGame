@@ -9,8 +9,10 @@ public class TB_RedBar : MonoBehaviour
 
     public Image RedBarImage => redBarImage;
 
+
     void Start()
     {
+        //GameManager.Instance.GetMiniGame<BatterieTimingGame>().RedBar = this
     }
 
     void Update()

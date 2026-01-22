@@ -2,61 +2,49 @@ Shader "Custom/SimpleBlurURP"
 {
     Properties 
     {
-        _BlurSize ("Force du Flou", Range(0, 1)) = 0.5
+        _BlurSize ("Force du Flou", Range(0, 0.1)) = 0.005
     }
 
     SubShader
     {
-        Tags { "RenderPipeline"="UniversalRenderPipeline" "RenderType"="Opaque" }
-        ZWrite Off Cull Off
+        Tags { "RenderPipeline" = "UniversalPipeline" }
+        ZTest Always ZWrite Off Cull Off
 
         Pass
         {
             Name "BlurPass"
-
             HLSLPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+            #pragma vertex Vert
+            #pragma fragment Frag
             
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl" 
 
             float _BlurSize;
+            TEXTURE2D(_CameraColorTexture);
+            SAMPLER(sampler_CameraColorTexture);
 
-            TEXTURE2D(_BlitTexture);
-            SAMPLER(sampler_BlitTexture);
+            struct Attributes { uint vertexID : SV_VertexID; };
+            struct Varyings { float4 positionCS : SV_POSITION; float2 uv : TEXCOORD0; };
 
-            struct Attributes
+            Varyings Vert(Attributes input)
             {
-                float4 positionOS : POSITION;
-                float2 uv : TEXCOORD0;
-            };
-
-            struct Varyings
-            {
-                float4 positionHCS : SV_POSITION;
-                float2 uv : TEXCOORD0;
-            };
-
-            Varyings vert (Attributes IN)
-            {
-                Varyings OUT;
-                OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                OUT.uv = IN.uv;
-                return OUT;
+                Varyings output;
+                output.positionCS = GetFullScreenTriangleVertexPosition(input.vertexID);
+                output.uv = GetFullScreenTriangleTexCoord(input.vertexID);
+                return output;
             }
 
-            half4 frag (Varyings IN) : SV_Target
+            half4 Frag(Varyings input) : SV_Target
             {
-                float2 offX = float2(_BlurSize, 0);
-                float2 offY = float2(0, _BlurSize * _ScreenParams.x / _ScreenParams.y); 
+                float2 uv = input.uv;
+                float2 off = float2(_BlurSize, _BlurSize); 
 
-                half4 col = SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv);
-
-                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv + offX);
-                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv - offX);
-                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv + offY);
-                col += SAMPLE_TEXTURE2D(_BlitTexture, sampler_BlitTexture, IN.uv - offY);
+                half4 col = SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, uv);
+                col += SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, uv + float2(off.x, 0));
+                col += SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, uv - float2(off.x, 0));
+                col += SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, uv + float2(0, off.y));
+                col += SAMPLE_TEXTURE2D(_CameraColorTexture, sampler_CameraColorTexture, uv - float2(0, off.y));
 
                 return col / 5.0;
             }

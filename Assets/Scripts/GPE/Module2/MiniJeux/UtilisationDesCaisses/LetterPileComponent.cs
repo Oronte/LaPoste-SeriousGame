@@ -97,7 +97,7 @@ public class LetterPileComponent : MonoBehaviour
             if (useDebug) Debug.Log("First hand selected");
             firstHandSelect = _args.interactorObject;
         }
-        else if (secondHandSelect == null)
+        else if (secondHandSelect == null && _args.interactorObject != firstHandSelect)
         {
             if (useDebug) Debug.Log("Second hand selected");
             secondHandSelect = _args.interactorObject;
@@ -122,6 +122,11 @@ public class LetterPileComponent : MonoBehaviour
             Invoke(nameof(EnableGrab), 1.0f);
             firstHandSelect = null;
             secondHandSelect = null;
+
+            //On invoque OnMinValue car c'est l'event qui appelle la fin du mini jeu
+            //TODO Changer ca avec un event dans le gestionnaire du jeu
+            //progressBar.OnMinValue.Invoke();
+
         }
     }
 

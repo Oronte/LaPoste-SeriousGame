@@ -1,10 +1,20 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
 public class TB_FeedbackComponent : MonoBehaviour
 {
-    [SerializeField] AudioClip[] audioClips;
+    [SerializeField] List<AudioClip> audioClips;
+    [SerializeField] AudioClip barreBipSon;
+    [SerializeField] AudioClip courtCircuitSon;
+    [SerializeField] AudioClip erreurSon;
     [SerializeField, VisibleAnywhereProperty] AudioSource audioSource;
+    
+
+    public AudioClip BarreBipSon => barreBipSon;
+    public AudioClip CourtCircuitSon => courtCircuitSon;
+    public AudioClip ErreurSon => erreurSon;
 
 
 
@@ -16,20 +26,20 @@ public class TB_FeedbackComponent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void Init()
     {
-        
+       
     }
 
     public void PlaySound(string clipName)
     {
-        if(!audioSource || audioClips.Length == 0)
+        if(!audioSource || audioClips.Count == 0)
         {
             Debug.Log("AudioSource or AudioClips not set !");
             return;
         }
 
-        int _size = audioClips.Length;
+        int _size = audioClips.Count;
         for (int _i = 0; _i < _size; _i++)
         {
             if (audioClips[_i].name == clipName)
@@ -40,5 +50,17 @@ public class TB_FeedbackComponent : MonoBehaviour
             }
         }
         Debug.Log("Clip: " + clipName + " not found !");
+    }
+
+    public void PlaySound(AudioClip _clipToPLay)
+    {
+        if (!audioSource || !_clipToPLay)
+        {
+            Debug.Log("AudioSource or AudioClips not set !");
+            return;
+        }
+
+        audioSource.clip = _clipToPLay;
+        audioSource.Play();
     }
 }

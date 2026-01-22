@@ -8,12 +8,11 @@ public class Key : MonoBehaviour
 
     [SerializeField, Tooltip("Active le debugger de l'objet (Log)")] bool useDebug = false;
     [SerializeField, Tooltip("Son contre le metal du cadena")] AudioClip missPadlockSound = null;
+    [SerializeField, VisibleAnywhereProperty, Tooltip("Transform contenant le particle Component")] Transform particlePos = null;
     AudioSource audioSource = null;
-
+    ParticleSystem particlesSys = null;
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
-        if(!audioSource) audioSource = GetComponentInChildren<AudioSource>();
         //Invoke(nameof(Init), 0.5f);
         Init();
     }
@@ -21,6 +20,10 @@ public class Key : MonoBehaviour
 
     void Init()
     {
+        audioSource = GetComponent<AudioSource>();
+        if (!audioSource) audioSource = GetComponentInChildren<AudioSource>();
+        particlesSys = GetComponentInChildren<ParticleSystem>();
+        particlePos = particlesSys?.transform;
         if (!GameManager.Instance) return;
         KeyGame _keyGame = GameManager.Instance.GetMiniGame<KeyGame>();
         if(!_keyGame) return;
@@ -51,10 +54,14 @@ public class Key : MonoBehaviour
         Padlock _padlock = _collision.collider.GetComponent<Padlock>();
         if (!_padlock) _padlock = _collision.collider.GetComponentInChildren<Padlock>();
         if (!_padlock) _padlock = _collision.collider.GetComponentInParent<Padlock>();
-        if (!_padlock) return;
+        if (!_padlock || !particlesSys ||!audioSource) return;
         audioSource.clip = missPadlockSound;
         audioSource.Play();
+        particlesSys.Play();
+        if (!particlePos || _collision.contactCount < 1) return;
+        particlePos.position = _collision.contacts[0].point;
     }
+
     /// <summary>
     /// Récupére le composant de gravité et desactive la gravité
     /// </summary>

@@ -19,10 +19,14 @@ public class Fader : MonoBehaviour
     [Header("Config", order = 1)]
     [SerializeField] Color fadeColor = Color.black;
     [SerializeField] float speedMultiplier = 1.0f;
+    [SerializeField] bool fadeOutOnStart = false;
 
     [Header("Events", order = 2)]
     [SerializeField] UnityEvent onFadeFinished = null;
     [SerializeField] UnityEvent onBetweenFadeInOut = null;
+
+    public UnityEvent OnBetweenFadeInOut => onBetweenFadeInOut;
+    public UnityEvent OnFadeFinished => onFadeFinished;
 
     FadeState state = FadeState.None;
     float fade = 0.0f;
@@ -30,7 +34,9 @@ public class Fader : MonoBehaviour
     void Start()
     {
         if (!image) return;
+
         image.color = fadeColor;
+        if (fadeOutOnStart) FadeOut();
     }
 
     void Update()
@@ -79,20 +85,25 @@ public class Fader : MonoBehaviour
         Color _color = image.color;
         _color.a = _aplha;
         image.color = _color;
+
+        image.raycastTarget = _aplha > 0.01f;
     }
 
     public void FadeIn()
     {
+        fade = 0.0f;
         state = FadeState.FadeIn;
     }
 
     public void FadeInOut()
     {
+        fade = 0.0f;
         state = FadeState.FadeInOut_In;
     }
 
     public void FadeOut()
     {
+        fade = 1.0f;
         state = FadeState.FadeOut;
     }
 }
