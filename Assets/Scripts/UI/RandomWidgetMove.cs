@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class RandomWidgetMove : MonoBehaviour
 {
@@ -20,6 +21,12 @@ public class RandomWidgetMove : MonoBehaviour
     //Choix du type de translation au movement
     [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Choix du type de translation au movement")]
     Space translateType = Space.World;
+    //Distance max de déplacement
+    [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Distance max de déplacement")]
+    float distanceLimit = 100.0f;
+
+    //Position de départ
+    Vector3 startPos = Vector3.zero;
     void Start()
     {
         Init();
@@ -53,7 +60,12 @@ public class RandomWidgetMove : MonoBehaviour
             StopRandomMove();
             return;
         }
-        Vector3 _randomOffset = Random.insideUnitCircle * randomMoveRadius;
+        Vector3 _randomOffset = Vector3.zero;
+        do
+        {
+            _randomOffset = Random.insideUnitCircle * randomMoveRadius;
+
+        } while (Vector3.Distance(widgetTransform.position + _randomOffset, startPos) >= distanceLimit);
         widgetTransform.Translate(_randomOffset, translateType);
     }
 
@@ -65,5 +77,6 @@ public class RandomWidgetMove : MonoBehaviour
         widgetTransform = GetComponent<RectTransform>();
         if(!widgetTransform) widgetTransform = GetComponentInChildren<RectTransform>();
         if (LaunchOnStart) StartRandomMove();
+        startPos = widgetTransform.position;
     }
 }

@@ -14,6 +14,11 @@ public class QuizDatabaseEditor : EditorWindow
         GetWindow<QuizDatabaseEditor>("Quiz Editor");
     }
 
+    private void OnEnable()
+    {
+        database.RecalculateIDS();
+    }
+
     private void OnGUI()
     {
         database = (QuizDatabase)EditorGUILayout.ObjectField("Quiz Database", database, typeof(QuizDatabase), false);

@@ -24,7 +24,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Scene_TestQuiz.unity
     guid: edb4103dcbe18b24d82d1b386afa85d0
   - enabled: 1
-    path: Assets/Scenes/Scene_TestVerificationPalletTruck.unity
+    path: Assets/Scenes/Scene_TestTruckRecharge.unity
     guid: a13f1d4ccbe87aa45a7039d32404724c
   - enabled: 1
     path: Assets/Scenes/TestFX.unity

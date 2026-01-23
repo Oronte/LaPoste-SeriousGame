@@ -14,6 +14,11 @@ public class DialogueDatabaseEditor : EditorWindow
         GetWindow<DialogueDatabaseEditor>("Dialogue Editor");
     }
 
+    private void OnEnable()
+    {
+        database.RecalculateIDS();
+    }
+
     private void OnGUI()
     {
         database = (DialogueDatabase)EditorGUILayout.ObjectField("Dialogue Database", database, typeof(DialogueDatabase), false);

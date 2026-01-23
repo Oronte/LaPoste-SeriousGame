@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class QuizPanelBehaviour : MonoBehaviour
@@ -22,10 +23,15 @@ public class QuizPanelBehaviour : MonoBehaviour
     [SerializeField] int currentQuestionId = 0;
     [SerializeField] bool isShowingAnswer = false;
 
+    [Header("Events")]
+    public UnityEvent OnGoodAnswer;
+    public UnityEvent OnBadAnswer;
+    public UnityEvent OnQuizFinished;
+
+
     private void OnEnable()
     {
         UpdateQuestion(0);
-
         foreach (QuizButton _button in buttonList)
         {
             if (!_button)
@@ -48,7 +54,6 @@ public class QuizPanelBehaviour : MonoBehaviour
     {
         foreach (TextMeshProUGUI _text in answersText)
         {
-            Debug.Log($"Clear {_text.text}");
             Destroy(_text.gameObject);
         }
         answersText.Clear();
@@ -72,12 +77,11 @@ public class QuizPanelBehaviour : MonoBehaviour
         questionText.color = Color.white;
         currentQuestionId = _questionId;
 
-    
         // attribution des réponse au bouton.
         for (int _i = 0; _i < buttonList.Count; _i++)
         {
             QuizButton _button = buttonList[_i];
-            _button.ResetState();
+            _button.ResetButton();
             if (_i >= _question.answers.Count)
             {
                 _button.DisableButton(true);
@@ -106,6 +110,7 @@ public class QuizPanelBehaviour : MonoBehaviour
         {
             foreach(QuizButton _button in selectedsAnswer)
                 _button.SetButtonColor(Color.white);
+
             selectedsAnswer.Clear();
         }
         selectedsAnswer.Add(_trigger);
@@ -131,6 +136,12 @@ public class QuizPanelBehaviour : MonoBehaviour
         ResetPanel();
         questionText.SetText(_result ? "Bonnes réponses !" : "Mauvaises réponses !");
         questionText.color = _result ? Color.green : Color.red;
+
+        if(_result)
+            OnGoodAnswer?.Invoke();
+        else
+            OnBadAnswer?.Invoke();
+
     }
 
     void RevealAnswer()
@@ -166,5 +177,6 @@ public class QuizPanelBehaviour : MonoBehaviour
         {
             _button.DisableButton(true);
         }
+        OnQuizFinished?.Invoke();
     }
 }

@@ -13,24 +13,14 @@ public class BatterieTimingGame : MiniGame
 
     public override bool IsFinished => isFinished;
 
-    //reaction parameters
-    [SerializeField, Tooltip("Définis le temps de réaction décalé en milliseconde")]
-    float reactionDelay = 300.0f;
 
-    //speed parameters
-    [SerializeField, Tooltip("\"True\" si une courbe est utilisé pour definir la vitesse du mouvement de maniere plus precise")]
-    bool useCurveSpeed = false;
-    [SerializeField, Tooltip("Définis la vitesse "),  HideCondition("useCurveSpeed", _invert: true), Range(1, 20)]
-    float speed = 2.0f;
-    [SerializeField, Tooltip("Courbe definissant la vitesse du mouvement de la barre"),HideCondition("useCurveSpeed")]
-    AnimationCurve speedCurve = null;
 
     //cycle parameters
     [SerializeField, Tooltip("Définis le nombre de cycle maximum")]
     int maxCycle = 4;
     [SerializeField, VisibleAnywhereProperty, Tooltip("Est le nombre de cycle effectuer depuis le début")]
     int cycleCount = 0;
-    [SerializeField, Tooltip("temps en ms après lequel la barre s'arrète une fois le dernier cycle terminé")]
+    [SerializeField, Tooltip("temps en milliseconde après lequel la barre s'arrète une fois le dernier cycle terminé")]
     int delayAfterLastCycle = 0;
 
 
@@ -48,6 +38,23 @@ public class BatterieTimingGame : MiniGame
     //Component references
     [SerializeField, VisibleAnywhereProperty]
     TB_FeedbackComponent feedback;
+
+
+    //======= CUSTOMIZABLE PARAMETERS ============
+
+    //speed parameters
+    [SerializeField, Tooltip("\"True\" si une courbe est utilisé pour definir la vitesse du mouvement de maniere plus precise")]
+    bool useCurveSpeed = false;
+    [SerializeField, Tooltip("Définis la vitesse "),  HideCondition("useCurveSpeed", _invert: true), Range(1, 20)]
+    float speed = 2.0f;
+    [SerializeField, Tooltip("Courbe definissant la vitesse du mouvement de la barre"),HideCondition("useCurveSpeed")]
+    AnimationCurve speedCurve = null;
+
+    //reaction parameters
+    [SerializeField, Tooltip("Définis le temps de réaction décalé en milliseconde")]
+    float reactionDelay = 300.0f;
+
+    //Component references
     [SerializeField, Tooltip("Reference vers le bouton d'arret de la barre")] 
     TB_StopButton stopButton;
 
@@ -104,6 +111,7 @@ public class BatterieTimingGame : MiniGame
     {
         canMove = false;
         isFinished = true;
+        feedback.SetActiveRedFlash();
         feedback.PlaySound(feedback.CourtCircuitSon);
     }
 
@@ -129,8 +137,9 @@ public class BatterieTimingGame : MiniGame
         redBar.RedBarImage.rectTransform.position += new Vector3(0, invert ? -_speed : _speed, 0);
         Vector3 _containerPos = container.rectTransform.rect.position;
 
-        
+        //check if the bar is out of bounds and act accordingly. 
         CheckIsOut(_pos, _min, _max);
+        //check if cycle count is greater than MaxCycle
         CheckIsFinish();
 
     }
@@ -171,20 +180,25 @@ public class BatterieTimingGame : MiniGame
 
     public void StopEvent()
     {
+        //call stopRedBar function with reaction delay
         Invoke(nameof(StopRedBar), reactionDelay * 0.001f);
     }
 
     void StopRedBar()
     {
         if (!canMove) return;
+        //check if the bat is in the greenZone
         bool _isIn = CheckGoodZone();
         if(_isIn)
         {
-            Invoke(nameof(StopRedBar), 0.1f);
+            //If the bar is in the green zone, do not stop and wait until it is outside.
+            Invoke(nameof(StopRedBar), 0.25f);
             return;
         }
         canMove = false;
+        feedback.SetActiveRedFlash();
         feedback.PlaySound(feedback.ErreurSon);
+
         
     }
 
@@ -202,16 +216,8 @@ public class BatterieTimingGame : MiniGame
 
         float _barSize = redBar.RedBarImage.rectTransform.rect.height;
         float _pos = redBar.RedBarImage.rectTransform.localPosition.y - (invert ? _barSize : 0);
-        if (_pos <= _goodZoneMax && _pos >= _goodZoneMin)
-        {
-            Debug.Log("T'es dedans !!");
-            return true;
-        }
-        else
-        {
-            Debug.Log("T'es PAS dedans !!");
-            return false;
-        }
+
+        return _pos <= _goodZoneMax && _pos >= _goodZoneMin;
 
     }
 

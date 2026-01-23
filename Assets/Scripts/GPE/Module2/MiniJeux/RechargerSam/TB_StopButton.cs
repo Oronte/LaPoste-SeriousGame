@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class TB_StopButton : MonoBehaviour

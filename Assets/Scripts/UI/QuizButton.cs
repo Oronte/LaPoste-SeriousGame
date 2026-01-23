@@ -27,7 +27,7 @@ public class QuizButton : MonoBehaviour
             pokeFilter = GetComponent<XRPokeFilter>();
     }
 
-    public void DisableButton(bool _shouldBlackButton)
+    public void DisableButton(bool _shouldBlackButton = true)
     {
         if(_shouldBlackButton)
             SetButtonColor(Color.black);
@@ -36,7 +36,7 @@ public class QuizButton : MonoBehaviour
         pokeFilter.enabled = false;
     }
 
-    public void ResetState()
+    public void ResetButton()
     {
         SetButtonColor(Color.white);
         if (!pokeFilter)

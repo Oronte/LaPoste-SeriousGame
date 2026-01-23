@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
-[RequireComponent(typeof(HingeJoint), typeof(XRGrabInteractable))]
+[RequireComponent(typeof(XRGrabInteractable))]
 public class LeverComponent : MonoBehaviour, IEnabler
 {
 
@@ -19,9 +19,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
     [SerializeField] List<GameObject> enablers = new List<GameObject>();
     [SerializeField] bool isEnable = true;
 
-    JointLimits limits;
-    JointSpring spring;
-    bool useLimit = true, useMotor = false, isSettle = false;
+    bool isSettle = false;
 
     // Interface implementation 
     public bool IsEnable { get { return isEnable; } set { isEnable = value; } }
@@ -40,16 +38,13 @@ public class LeverComponent : MonoBehaviour, IEnabler
         hinge = GetComponent<HingeJoint>();
         if (hinge == null)
             Debug.Log("Error Levier Component: No hinge joint found");
-        limits = hinge.limits;
-        spring = hinge.spring;
-        useLimit = hinge.useLimits;
-        useMotor = hinge.useMotor;
+
         UpdateCanMove(IsEnable);
 
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (!IsEnable || !hinge) return;
 
@@ -62,6 +57,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
             isSettle = true;
             foreach (GameObject _current in enablers)
             {
+                if (_current == null) continue;
                 _current.GetComponent<IEnabler>().Enable();
             }
             return;
@@ -74,6 +70,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
             isSettle = true;
             foreach (GameObject _current in enablers)
             {
+                if (_current == null) continue;
                 _current.GetComponent<IEnabler>().Disable();
             }
             return;
@@ -103,14 +100,6 @@ public class LeverComponent : MonoBehaviour, IEnabler
     {
 
         if (!grabInteractable) return;
-        if (GetComponent<HingeJoint>()) return;
-        Debug.Log("Enable");
-
-        hinge = gameObject.AddComponent<HingeJoint>();
-        hinge.limits = limits;
-        hinge.spring = spring;
-        hinge.useLimits = useLimit;
-        hinge.useMotor = useMotor;
         grabInteractable.enabled = true;
         IsEnable = true;
     }
@@ -119,11 +108,6 @@ public class LeverComponent : MonoBehaviour, IEnabler
     public void Disable()
     {
         Debug.Log("Disable");
-
-        if (!grabInteractable) return;
-        if (!GetComponent<Joint>()) return;
-        Destroy(hinge);
-        hinge = null;
         grabInteractable.enabled &= false;
         IsEnable = false;
     }

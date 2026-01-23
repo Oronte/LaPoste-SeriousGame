@@ -12,13 +12,15 @@ public class SnapperComponent : MonoBehaviour
     [SerializeField] Transform socket = null;
     [SerializeField] XRSocketInteractor socketInteractor = null;
     [SerializeField] List<GameObject> enablers = new List<GameObject>();
+    bool isUnsnap = true, isSnap = false;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         socket = GetComponentInChildren<Transform>();
-        if(!socketInteractor.attachTransform) return;
+        socketInteractor = GetComponent<XRSocketInteractor>();
+        if (socketInteractor.attachTransform == null) return;
         {
             if (!socket)
             {
@@ -30,31 +32,24 @@ public class SnapperComponent : MonoBehaviour
             }
             socketInteractor.attachTransform = socket;
         }
-        socketInteractor = GetComponent<XRSocketInteractor>();
+        
     }
 
-    private void FixedUpdate()
+    public void OnSnap()
     {
-        
-        
-    }
-    void OnSnap(FCollisionData _collider)
-    {
-        foreach (GameObject _newSocket in enablers)
+        foreach (GameObject _current in enablers)
         {
-            IEnabler _enabler = _newSocket.GetComponent<IEnabler>();
-            if (_enabler == null) continue;
-            _enabler.Enable();
+            if(_current == null) continue ;
+            _current.GetComponent<IEnabler>().Enable();
         }
     }
 
-    void OnDesnap(FCollisionData _collider)
+    public void OnUnSnap()
     {
-        foreach (GameObject _newSocket in enablers)
+        foreach (GameObject _current in enablers)
         {
-            IEnabler _enabler = _newSocket.GetComponent<IEnabler>();
-            if (_enabler == null) continue;
-            _enabler.Disable();
+            if (_current == null) continue;
+            _current.GetComponent<IEnabler>().Disable();
         }
     }
 }

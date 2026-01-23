@@ -1,11 +1,10 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TB_RedBar : MonoBehaviour
 {
 
-    [SerializeField] protected Image redBarImage;
+    [SerializeField] Image redBarImage;
 
     public Image RedBarImage => redBarImage;
 

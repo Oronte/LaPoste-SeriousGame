@@ -42,7 +42,7 @@ public class TriggerBoxComponent : MonoBehaviour
 
     private void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject.layer != layers) return;
+        if (((1 << collider.gameObject.layer) & layers) == 0) return;
 
         isTriggered = true;
         FCollisionData _newData = new FCollisionData(collider.gameObject, collider.gameObject.transform.position);
@@ -50,7 +50,7 @@ public class TriggerBoxComponent : MonoBehaviour
     }
     private void OnTriggerExit(Collider collider)
     {
-        if (collider.gameObject.layer != layers) return;
+        if (((1 << collider.gameObject.layer) & layers) == 0) return;
 
         isTriggered = false;
         FCollisionData _newData = new FCollisionData(collider.gameObject, collider.gameObject.transform.position);
