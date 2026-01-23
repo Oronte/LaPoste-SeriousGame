@@ -17,13 +17,14 @@ public class LeverComponent : MonoBehaviour, IEnabler
     [SerializeField] XRGrabInteractable grabInteractable;
     [SerializeField, Range(0f, 1f)] float minTolerance = 0.1f, maxTolerance = 0.8f;
     [SerializeField] List<GameObject> enablers = new List<GameObject>();
+    [SerializeField] bool isEnable = true;
 
     JointLimits limits;
     JointSpring spring;
     bool useLimit = true, useMotor = false, isSettle = false;
 
     // Interface implementation 
-    [SerializeField] public bool IsEnable { get; set; } = true;
+    public bool IsEnable { get { return isEnable; } set { isEnable = value; } }
 
     public float ComputeAngleToPourcentage(float angle)
     {
@@ -124,7 +125,7 @@ public class LeverComponent : MonoBehaviour, IEnabler
         Destroy(hinge);
         hinge = null;
         grabInteractable.enabled &= false;
-        IsEnable = true;
+        IsEnable = false;
     }
 
     //private void ToSnap(float _angleToSnap)

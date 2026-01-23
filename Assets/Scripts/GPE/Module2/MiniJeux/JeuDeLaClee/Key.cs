@@ -60,6 +60,7 @@ public class Key : MonoBehaviour
         particlesSys.Play();
         if (!particlePos || _collision.contactCount < 1) return;
         particlePos.position = _collision.contacts[0].point;
+        particlePos.LookAt(transform.position); 
     }
 
     /// <summary>

@@ -9,7 +9,6 @@ public class QuizButton : MonoBehaviour
     [SerializeField] XRPokeFilter pokeFilter = null;
 
     [Header("Config", order = 1)]
-    [SerializeField] string text = "A";
     [SerializeField] QuizAnswer answer = null;
     public UnityEvent<QuizButton> OnButtonActivated;
 

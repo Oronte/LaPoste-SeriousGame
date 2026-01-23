@@ -21,6 +21,7 @@ public class QuizPanelBehaviour : MonoBehaviour
 
     [SerializeField] int currentQuestionId = 0;
     [SerializeField] bool isShowingAnswer = false;
+
     private void OnEnable()
     {
         UpdateQuestion(0);
@@ -51,6 +52,7 @@ public class QuizPanelBehaviour : MonoBehaviour
             Destroy(_text.gameObject);
         }
         answersText.Clear();
+        selectedsAnswer.Clear();
     }
 
     public void UpdateQuestion(int _questionId)
@@ -59,11 +61,15 @@ public class QuizPanelBehaviour : MonoBehaviour
         if (!questionText || !database || !textPrefabs)
             return;
         if (_questionId < 0 || _questionId >= database.questions.Count)
+        {
+            EndGame();
             return;
-        Debug.Log("Clear");
+        }
+
         ResetPanel();
         QuizQuestion _question = database.questions[_questionId];
         questionText.SetText(_question.QuestionText);
+        questionText.color = Color.white;
         currentQuestionId = _questionId;
 
     
@@ -71,6 +77,7 @@ public class QuizPanelBehaviour : MonoBehaviour
         for (int _i = 0; _i < buttonList.Count; _i++)
         {
             QuizButton _button = buttonList[_i];
+            _button.ResetState();
             if (_i >= _question.answers.Count)
             {
                 _button.DisableButton(true);
@@ -107,15 +114,23 @@ public class QuizPanelBehaviour : MonoBehaviour
 
     public void OnValidateAnswer()
     {
+        if (!questionText || currentQuestionId < 0 || currentQuestionId >= database.questions.Count)
+            return;
+
         if(isShowingAnswer)
         {
             isShowingAnswer = false;
             UpdateQuestion(++currentQuestionId);
             return;
         }
+
         bool _result = CheckAnswer();
         RevealAnswer();
         isShowingAnswer = true;
+
+        ResetPanel();
+        questionText.SetText(_result ? "Bonnes réponses !" : "Mauvaises réponses !");
+        questionText.color = _result ? Color.green : Color.red;
     }
 
     void RevealAnswer()
@@ -123,7 +138,10 @@ public class QuizPanelBehaviour : MonoBehaviour
         foreach (QuizButton _button in buttonList)
         {
             _button.DisableButton(false);
-            _button.SetButtonColor(_button.GetAnswer().IsCorrect ? Color.green : Color.red);
+            QuizAnswer _answer = _button.GetAnswer();
+            if (_answer == null)
+                continue;
+            _button.SetButtonColor(_answer.IsCorrect ? Color.green : Color.red);
         }
     }
 
@@ -137,5 +155,16 @@ public class QuizPanelBehaviour : MonoBehaviour
             }
         }
         return true;
+    }
+
+    void EndGame()
+    {
+        ResetPanel();
+        questionText.SetText("Fin du QUIZ");
+        questionText.color = Color.white;
+        foreach (QuizButton _button in buttonList)
+        {
+            _button.DisableButton(true);
+        }
     }
 }

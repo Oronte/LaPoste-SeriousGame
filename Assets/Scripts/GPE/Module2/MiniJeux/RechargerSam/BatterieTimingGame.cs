@@ -176,7 +176,13 @@ public class BatterieTimingGame : MiniGame
 
     void StopRedBar()
     {
-        /*bool _isIn = */CheckGoodZone();
+        if (!canMove) return;
+        bool _isIn = CheckGoodZone();
+        if(_isIn)
+        {
+            Invoke(nameof(StopRedBar), 0.1f);
+            return;
+        }
         canMove = false;
         feedback.PlaySound(feedback.ErreurSon);
         
