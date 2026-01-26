@@ -1,4 +1,3 @@
-using Dreamteck.Splines.Editor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -40,7 +39,6 @@ public class TB_FeedbackComponent : MonoBehaviour
     void Init()
     {
         audioSource = GetComponent<AudioSource>();
-        Invoke(nameof(SetActiveRedFlash), 3);
         redFlashImage.gameObject.SetActive(false);
 
     }
@@ -55,7 +53,7 @@ public class TB_FeedbackComponent : MonoBehaviour
     {
         if (!audioSource || !_clipToPLay)
         {
-            Debug.Log("AudioSource or AudioClips not set !");
+            //Debug.Log("AudioSource or AudioClips not set !");
             return;
         }
 
@@ -83,7 +81,7 @@ public class TB_FeedbackComponent : MonoBehaviour
     {
         if (!redFlashImage)
         {
-            Debug.Log("ya pas de red flash image");
+            //Debug.Log("ya pas de red flash image");
             return;
         }
 
@@ -92,7 +90,7 @@ public class TB_FeedbackComponent : MonoBehaviour
         float _t = Mathf.Clamp01(flashTimer / flashTime); // 0 -> 1
         float _alpha = opacityCurve.Evaluate(_t);
 
-        Debug.Log($"t={_t} alpha={_alpha}");
+        //Debug.Log($"t={_t} alpha={_alpha}");
 
         _alpha /= 255.0f;
         colorFlash.a = _alpha;

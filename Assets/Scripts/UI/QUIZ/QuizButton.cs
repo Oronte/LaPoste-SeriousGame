@@ -7,6 +7,7 @@ public class QuizButton : MonoBehaviour
     [Header("References", order = 0)]
     [SerializeField] GameObject button;
     [SerializeField] XRPokeFilter pokeFilter = null;
+    [SerializeField] QuizPanelBehaviour quizPanelBehaviour = null;
 
     [Header("Config", order = 1)]
     [SerializeField] QuizAnswer answer = null;
@@ -20,11 +21,13 @@ public class QuizButton : MonoBehaviour
 
     public QuizAnswer GetAnswer() => answer;
 
-    void Start()
+    void Awake()
     {
         SetButtonColor(Color.white);
         if(!pokeFilter)
             pokeFilter = GetComponent<XRPokeFilter>();
+        if(!quizPanelBehaviour)
+            quizPanelBehaviour= GetComponent<QuizPanelBehaviour>();
     }
 
     public void DisableButton(bool _shouldBlackButton = true)

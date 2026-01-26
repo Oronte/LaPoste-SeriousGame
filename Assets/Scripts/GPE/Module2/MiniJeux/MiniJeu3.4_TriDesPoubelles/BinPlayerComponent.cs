@@ -10,11 +10,8 @@ public class BinPlayerComponent : MonoBehaviour
         audio.Play(); // TODO mettre musique
     }
 
-    private void OnTriggerEnter(Collider _other)
+    public void StopAudio()
     {
-        TruckComponent _truck = _other.GetComponent<TruckComponent>();
-        if (!_truck) return;
         audio.Stop();
-        _truck.StopTruck();
     }
 }

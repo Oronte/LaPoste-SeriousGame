@@ -1,6 +1,10 @@
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine;
 using UnityEngine.UIElements;
 
+[ExecuteAlways]
 public class RandomWidgetMove : MonoBehaviour
 {
     //Lancement du move aléatoire au lancement
@@ -18,18 +22,58 @@ public class RandomWidgetMove : MonoBehaviour
     //Rayon maximum pour le move
     [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Rayon maximum pour le move")]
     float randomMoveRadius = 0.1f;
-    //Choix du type de translation au movement
-    [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Choix du type de translation au movement")]
-    Space translateType = Space.World;
     //Distance max de déplacement
     [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Distance max de déplacement")]
     float distanceLimit = 100.0f;
+    //Mode de déplacement
+    [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Mode de déplacement")]
+    Space spaceMove = Space.Self; 
+    //Utilisation des debugs
+    [SerializeField, Tooltip("Utilisation des debugs")]
+    bool useDebug = false;
+    //Utilisation des debugs seulement si l'objet est sélectionner
+    [SerializeField, HideCondition(nameof(useDebug)), ToggleVisibleAnywhereProperty, Tooltip("Seulement si l'objet est sélectionner")]
+    bool debugOnlyIfSelected = true;
+    //Couleur du cercle du rayon
+    [SerializeField, HideCondition(nameof(useDebug)), ToggleVisibleAnywhereProperty, Tooltip("Couleur du cercle du rayon")]
+    Color radiusColor = Color.red;
+    //Couleur du cercle de la positio
+    [SerializeField, HideCondition(nameof(useDebug)), ToggleVisibleAnywhereProperty, Tooltip("Couleur du cercle de la position")]
+    Color posColor = Color.blue;
+    //Rayon du cercle de la position
+    [SerializeField, HideCondition(nameof(useDebug)), ToggleVisibleAnywhereProperty, Tooltip("Rayon du cercle de la position")]
+    float posRadius = 0.1f;
 
     //Position de départ
-    Vector3 startPos = Vector3.zero;
+    [SerializeField, VisibleAnywhereProperty, Tooltip("Position de départ")] Vector3 startPos = Vector3.zero;
+
+    private void Awake()
+    {
+        widgetTransform = GetComponent<RectTransform>();
+        if (!widgetTransform) widgetTransform = GetComponentInChildren<RectTransform>();
+    }
+
+    private void Update()
+    {
+#if UNITY_EDITOR
+        if(Application.isPlaying) return;
+        startPos = widgetTransform ? widgetTransform.position : Vector3.zero;
+#endif
+    }
+
     void Start()
     {
+        if (!Application.isPlaying) return;
         Init();
+    }
+    /// <summary>
+    /// Lance ou Arrete le movement aléatoire continu du widget selon son etat actuel
+    /// </summary>
+    public void ToggleRandomMove()
+    {
+        if (!IsRunning) StartRandomMove();
+        else StopRandomMove();
+
     }
     /// <summary>
     /// Lance le movement aléatoire continu du widget
@@ -60,13 +104,17 @@ public class RandomWidgetMove : MonoBehaviour
             StopRandomMove();
             return;
         }
-        Vector3 _randomOffset = Vector3.zero;
-        do
+        Vector2 _randomUnit = Random.insideUnitCircle;
+        Vector3 _randomOffset = new Vector3(_randomUnit.x, _randomUnit.y, 0) * randomMoveRadius;
+        if (Vector3.Distance(widgetTransform.position + _randomOffset, startPos) >= distanceLimit)
         {
-            _randomOffset = Random.insideUnitCircle * randomMoveRadius;
-
-        } while (Vector3.Distance(widgetTransform.position + _randomOffset, startPos) >= distanceLimit);
-        widgetTransform.Translate(_randomOffset, translateType);
+            widgetTransform.position = Vector3.MoveTowards(widgetTransform.position, startPos, Time.deltaTime * randomMoveRadius);
+            return;
+        }
+        //_randomOffset.z = widgetTransform.position.z;
+        _randomOffset = Vector3.ProjectOnPlane(_randomOffset, widgetTransform.forward);
+        widgetTransform.Translate(_randomOffset, spaceMove);
+        //widgetTransform.position += _randomOffset;
     }
 
     /// <summary>
@@ -74,9 +122,40 @@ public class RandomWidgetMove : MonoBehaviour
     /// </summary>
     void Init()
     {
-        widgetTransform = GetComponent<RectTransform>();
-        if(!widgetTransform) widgetTransform = GetComponentInChildren<RectTransform>();
         if (LaunchOnStart) StartRandomMove();
-        startPos = widgetTransform.position;
+        startPos = widgetTransform ? widgetTransform.position : Vector3.zero;
+    }
+
+    /// <summary>
+    /// Fonction d'unity qui permet les debugs
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        if(!useDebug || debugOnlyIfSelected) return;
+        DebugRadius();
+    }
+    /// <summary>
+    /// Fonction d'unity qui permet les debugs quand selectionner
+    /// </summary>
+    private void OnDrawGizmosSelected()
+    {
+        if(!useDebug || !debugOnlyIfSelected) return;
+        DebugRadius();
+
+    }
+
+    /// <summary>
+    /// Fonction pour afficher mes debugs sphere de rayon et position
+    /// </summary>
+    void DebugRadius()
+    {
+        if (!widgetTransform) return;
+#if UNITY_EDITOR
+        Handles.color = radiusColor;
+        Handles.DrawWireDisc(startPos, widgetTransform.forward, distanceLimit);
+        Handles.color = posColor;
+        Handles.DrawSolidDisc(widgetTransform.position, widgetTransform.forward, posRadius);
+        Handles.color = Color.white;
+#endif
     }
 }

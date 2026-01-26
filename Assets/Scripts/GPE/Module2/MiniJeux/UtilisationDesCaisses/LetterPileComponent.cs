@@ -14,36 +14,35 @@ public class LetterPileComponent : MonoBehaviour
     [SerializeField, VisibleAnywhereProperty] bool isGrabbed = false; //If the pile is grabbed
 
     [Header("Components", order = 1)]
-    [SerializeField] BoxCollider ke7BoxCollider = null; //The collider of the K&7 (caissette)
-    [SerializeField] RadialProgressBar progressBar = null;
+    [SerializeField, VisibleAnywhereProperty] BoxCollider ke7BoxCollider = null; //The collider of the K&7 (caissette)
+    [SerializeField, VisibleAnywhereProperty] RadialProgressBar progressBar = null; //The progress bar
 
     [Header("Debug", order = 2)]
     [SerializeField] bool useDebug = false;
 
     [Header("Component Settings", order = 3)]
     [SerializeField, VisibleAnywhereProperty] bool isGameOver = false;
-    [SerializeField] Vector3 defaultPosition = Vector3.zero;
-    [SerializeField] Quaternion defaultRotation = Quaternion.identity;
+    [SerializeField, VisibleAnywhereProperty] Vector3 defaultPosition = Vector3.zero;
+    [SerializeField, VisibleAnywhereProperty] Quaternion defaultRotation = Quaternion.identity;
 
     void Start()
     {
         Init();//TODO Remove, the storage letter game will do it
     }
     
-    public void Init()
+    public void Init(RadialProgressBar _progressBar = null)
     {
         defaultPosition = transform.position;
         defaultRotation = transform.rotation;
 
         grab = GetComponent<XRGrabInteractable>();//Get the component to edit the grab behavior
-
+        if (_progressBar) progressBar = _progressBar;
         if (grab)
         {
             grab.trackPosition = false; // The grabbed object will not move or rotate
             grab.trackRotation = false;
             grab.selectEntered.AddListener(OnSelectEntered); //When a hand interact with this object it calls a function
             grab.selectExited.AddListener(OnSelectExited); //When a hand exit interact with this object it calls a function
-            
         }
         
         if (progressBar)
@@ -54,9 +53,7 @@ public class LetterPileComponent : MonoBehaviour
 
     public void Reset()
     {
-        grab.trackPosition = false;
-        grab.trackRotation = false;
-        isGrabbed = false;
+        ChangeGameStatusGame(false);
         transform.position = defaultPosition;
         transform.rotation = defaultRotation;
         progressBar.Activate = true;
@@ -102,11 +99,20 @@ public class LetterPileComponent : MonoBehaviour
             if (useDebug) Debug.Log("Second hand selected");
             secondHandSelect = _args.interactorObject;
 
-            //Both hands are detected. We can grab.
-            grab.trackPosition = true;
-            grab.trackRotation = true;
-            isGrabbed = true;
+            ChangeGameStatusGame(true);
+            if (progressBar)
+            {
+                progressBar.Activate = true;
+            }
         }
+    }
+
+    void ChangeGameStatusGame(bool _status = true)
+    {
+        grab.trackPosition = _status;
+        grab.trackRotation = _status;
+        grab.enabled = _status;
+        isGrabbed = _status;
     }
 
     void OnSelectExited(SelectExitEventArgs _args)
@@ -115,16 +121,13 @@ public class LetterPileComponent : MonoBehaviour
         //We test if it was grab, if so then we drop everything.
         if (isGrabbed)
         {
-            grab.enabled = false;
-            isGrabbed = false;
-            grab.trackPosition = false;
-            grab.trackRotation = false;
-            Invoke(nameof(EnableGrab), 1.0f);
+            ChangeGameStatusGame(false);
+
+            Invoke(nameof(EnableGrab), 1.0f); // Timer to disable grab mod for x time (if a hands let go the letters it will fall)
             firstHandSelect = null;
             secondHandSelect = null;
 
-            //On invoque OnMinValue car c'est l'event qui appelle la fin du mini jeu
-            //TODO Changer ca avec un event dans le gestionnaire du jeu
+            //Just in case, if we let go of the letters, it might stop the game.
             //progressBar.OnMinValue.Invoke();
 
         }
@@ -144,7 +147,6 @@ public class LetterPileComponent : MonoBehaviour
     {
         if (useDebug) Debug.Log("Min value have been reached");
         isGameOver = true;
-        grab.trackPosition = false;
-        grab.trackRotation= false;
+        ChangeGameStatusGame(false);
     }
 }

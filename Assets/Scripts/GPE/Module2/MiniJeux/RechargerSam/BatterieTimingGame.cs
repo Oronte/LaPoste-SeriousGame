@@ -157,7 +157,7 @@ public class BatterieTimingGame : MiniGame
             if (!isUp)
             {
                 cycleCount++;
-                Debug.Log("Cycle Count: " + cycleCount);
+                //Debug.Log("Cycle Count: " + cycleCount);
             }
 
             if(isUp != invert)
@@ -174,7 +174,7 @@ public class BatterieTimingGame : MiniGame
         if (cycleCount >= maxCycle)
         {
             Invoke(nameof(OnBatteryFlat), delayAfterLastCycle * 0.001f);
-            Debug.Log("Game Finished" );
+            //Debug.Log("Game Finished" );
         }
     }
 

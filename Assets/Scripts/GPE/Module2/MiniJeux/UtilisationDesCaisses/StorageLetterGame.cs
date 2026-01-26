@@ -21,9 +21,9 @@ public class StorageLetterGame : MiniGame
     public override void StartGame()
     {
         base.StartGame();
-        wedge.Init();
-        letterPile.Init();
         progressBar.Init();
+        letterPile.Init(progressBar);
+        wedge.Init(letterPile.Grab);
         progressBar.OnMinValue.AddListener(ShowRestartMenu);
     }
 
@@ -52,6 +52,5 @@ public class StorageLetterGame : MiniGame
         progressBar.Reset();
         nextLevelButton.gameObject.SetActive(false);
         retryButton.gameObject.SetActive(false);
-
     }
 }

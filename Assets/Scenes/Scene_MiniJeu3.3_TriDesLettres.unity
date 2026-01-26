@@ -518,12 +518,32 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 3090593022434152172, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
+      propertyPath: maxSpawnRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090593022434152172, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
+      propertyPath: minSpawnRate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090593022434152172, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
       propertyPath: maxSpawnPosition.y
       value: 0.5375
       objectReference: {fileID: 0}
     - target: {fileID: 3090593022434152172, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
+      propertyPath: maxSpawnPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090593022434152172, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
+      propertyPath: maxSpawnRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090593022434152172, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
       propertyPath: minSpawnPosition.y
       value: 0.5375
+      objectReference: {fileID: 0}
+    - target: {fileID: 3090593022434152172, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
+      propertyPath: minSpawnPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3182011995299263038, guid: 3fe8c8646ca4219489c1206816c90955, type: 3}
       propertyPath: m_LocalPosition.x

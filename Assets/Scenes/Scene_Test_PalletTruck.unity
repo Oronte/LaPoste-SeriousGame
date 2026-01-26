@@ -196,6 +196,18 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.13035502
       objectReference: {fileID: 0}
+    - target: {fileID: 1781533787588402236, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781533787588402236, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781533787588402236, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 3905158086530746265, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.098837
@@ -290,7 +302,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 1a43fd3161f43814cb3f17afbaaa8c9d, type: 3}
     - target: {fileID: 4351107459971617979, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_PlayOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7696929437244183988, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -303,6 +315,14 @@ PrefabInstance:
     - target: {fileID: 7696929437244183988, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.056
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753404377638637559, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7753404377638637559, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7986280154401052677, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_PokeConfiguration.m_ConstantValue.m_InteractionDepthOffset
@@ -322,15 +342,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8320672179845974382, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.5656614
+      value: 4.0583835
       objectReference: {fileID: 0}
     - target: {fileID: 8320672179845974382, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.17932557
+      value: 0.000000513913
       objectReference: {fileID: 0}
     - target: {fileID: 8320672179845974382, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.012334644
+      value: 0.0000006607452
       objectReference: {fileID: 0}
     - target: {fileID: 8532229971375178777, guid: 66945366b2819bb449ad960fda8b5fb1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -686,7 +706,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ade911f3f1c812949b83122852563a10, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

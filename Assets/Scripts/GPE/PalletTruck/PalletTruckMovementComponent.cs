@@ -1,4 +1,5 @@
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class PalletTruckMovementComponent : MonoBehaviour
@@ -7,6 +8,7 @@ public class PalletTruckMovementComponent : MonoBehaviour
     public WheelCollider frontLeftWheel;
     public WheelCollider frontRightWheel;
     public Transform throttleTransform;
+    public Transform steeringWheel;
 
     public float maxMotorTorque = 15000.0f;
     public float maxAngle = 30.0f;
@@ -26,7 +28,26 @@ public class PalletTruckMovementComponent : MonoBehaviour
 
     void FixedUpdate()
     {
-        float _currentAngle = throttleTransform.localEulerAngles.z;
+        ManageNouvement();
+
+        ManageDirection();
+    }
+
+    private void ManageDirection()
+    {
+        float _currentAngle = Vector3.SignedAngle(transform.forward, steeringWheel.forward, transform.up);
+
+        if (Mathf.Abs(_currentAngle) < tolerance)
+        {
+            rearWheel.steerAngle = 90.0f;
+            return;
+        }
+        rearWheel.steerAngle = (_currentAngle / 3.0f) + 90.0f;
+    }
+
+    private void ManageNouvement()
+    {
+        float _currentAngle = throttleTransform.localEulerAngles.y;
         if (_currentAngle > 180.0f) _currentAngle -= 360.0f;
 
         if (Mathf.Abs(_currentAngle) < tolerance)

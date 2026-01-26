@@ -204,6 +204,12 @@ MonoBehaviour:
   tolerance: 0.02
   rootRightParent: {fileID: 0}
   rootLeftParent: {fileID: 0}
+  currentDelayTime: 0
+  maxDelayTime: 0
+  minDelay: 0.005
+  MaxDelay: 0.02
+  useTimerDelay: 0
+  remoteCanMove: 0
 --- !u!1 &427960207892146630
 GameObject:
   m_ObjectHideFlags: 0

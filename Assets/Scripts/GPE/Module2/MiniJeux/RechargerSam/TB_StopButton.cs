@@ -16,7 +16,7 @@ public class TB_StopButton : MonoBehaviour
         interactable = GetComponent<XRSimpleInteractable>();
         owner = _owner;
 
-        Debug.Log("Init stop button");
+        //Debug.Log("Init stop button");
 
 
     }
@@ -25,7 +25,7 @@ public class TB_StopButton : MonoBehaviour
     {
         if(!owner)
         {
-            Debug.Log("NO OWNER !!");
+            //Debug.Log("NO OWNER !!");
             return;
         }
         owner.StopEvent();

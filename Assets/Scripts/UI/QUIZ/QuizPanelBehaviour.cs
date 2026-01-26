@@ -84,6 +84,7 @@ public class QuizPanelBehaviour : MonoBehaviour
             _button.ResetButton();
             if (_i >= _question.answers.Count)
             {
+                Debug.Log(_question.answers.Count);
                 _button.DisableButton(true);
                 continue;
             }
