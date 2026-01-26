@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DefiencySlider : MonoBehaviour
+public class OptionsSlider : MonoBehaviour
 {
     [Header("References", order = 0)]
     [SerializeField] Slider slider = null;
@@ -16,6 +16,6 @@ public class DefiencySlider : MonoBehaviour
     public void UpdateValue()
     {
         if (!slider) return;
-        if (text) text.text = $"{slider.value / slider.maxValue * 100}%";
+        if (text) text.text = $"{(int)(slider.value / slider.maxValue * 100)}%";
     }
 }

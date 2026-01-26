@@ -1431,7 +1431,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8843772648647224792}
   - component: {fileID: 5211552309507096954}
-  - component: {fileID: 698508335638000994}
   - component: {fileID: 3702456460677419471}
   m_Layer: 0
   m_Name: Left Controller
@@ -1525,27 +1524,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
---- !u!114 &698508335638000994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3291912335283723587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a50d88b55b45648927679791f472de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_GroupName: Left
-  m_InteractionManager: {fileID: 0}
-  m_StartingGroupMembers:
-  - {fileID: 5017337411232966707}
-  - {fileID: 5077062254827608106}
-  m_StartingInteractionOverridesMap:
-  - groupMember: {fileID: 5017337411232966707}
-    overrideGroupMembers:
-    - {fileID: 5077062254827608106}
 --- !u!114 &3702456460677419471
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1738,37 +1716,14 @@ MonoBehaviour:
   inputComponent: {fileID: 4791331441467837353}
   leftHand: {fileID: 7900259628377837054}
   rightHand: {fileID: 6309215719252202143}
-  shakingIntensity: 0.089
-  shakingFrequency: 2
-  currentTime: 0
-  shakeOffset: {x: 0, y: 0, z: 0}
-  oldSocketOffset: {x: 0, y: 0, z: 0}
-  shouldBePositive: 0
+  rootLeft: {fileID: 0}
+  rootRight: {fileID: 0}
   useShaking: 0
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  shakeSettings: []
+  useLatence: 0
+  latenceForce: 0
+  rootLeftParent: {fileID: 0}
+  rootRightParent: {fileID: 0}
 --- !u!1 &4538929631991352796
 GameObject:
   m_ObjectHideFlags: 0
@@ -2068,7 +2023,6 @@ GameObject:
   m_Component:
   - component: {fileID: 547408609397777847}
   - component: {fileID: 1109693408024060693}
-  - component: {fileID: 3696652022522754606}
   - component: {fileID: 8649997213810980861}
   m_Layer: 0
   m_Name: Right Controller
@@ -2162,27 +2116,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
---- !u!114 &3696652022522754606
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796468905415401575}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a50d88b55b45648927679791f472de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_GroupName: Right
-  m_InteractionManager: {fileID: 0}
-  m_StartingGroupMembers:
-  - {fileID: 3018640963435431182}
-  - {fileID: 4268144974318157032}
-  m_StartingInteractionOverridesMap:
-  - groupMember: {fileID: 3018640963435431182}
-    overrideGroupMembers:
-    - {fileID: 4268144974318157032}
 --- !u!114 &8649997213810980861
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -79,7 +79,7 @@ public class IHM : MonoBehaviour
             _orga.gameObject.SetActive(_value);
             if (_orga.TryGetComponentInChildren(out RandomWidgetMove _random))
             {
-                //_random.ToggleRandomMove(_value);
+                _random.SetRandomMove(_value);
             }
         }
     }

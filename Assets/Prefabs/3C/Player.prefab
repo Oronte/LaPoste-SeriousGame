@@ -186,30 +186,12 @@ MonoBehaviour:
   rightHand: {fileID: 3697203124414903941}
   rootLeft: {fileID: 5041337712423482359}
   rootRight: {fileID: 4005453424812110007}
-  shakingIntensity: 0.089
-  shakingFrequency: 2
-  currentTime: 0
-  shakeOffset: {x: 0, y: 0, z: 0}
-  oldSocketOffset: {x: 0, y: 0, z: 0}
-  shouldBePositive: 0
   useShaking: 0
-  curve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  shakeSettings: []
   useLatence: 0
-  maxDistancedDelta: 0.002
-  tolerance: 0.02
-  rootRightParent: {fileID: 0}
+  latenceForce: 0
   rootLeftParent: {fileID: 0}
-  currentDelayTime: 0
-  maxDelayTime: 0
-  minDelay: 0.005
-  MaxDelay: 0.02
-  useTimerDelay: 0
-  remoteCanMove: 0
+  rootRightParent: {fileID: 0}
 --- !u!1 &427960207892146630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,6 +1027,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4005453424812110007}
+  - component: {fileID: 142120366935546806}
   m_Layer: 0
   m_Name: Right Hand
   m_TagString: Untagged
@@ -1071,6 +1054,29 @@ Transform:
   - {fileID: 7002487082858850952}
   m_Father: {fileID: 1441430386437797803}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &142120366935546806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1574563290252632313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a50d88b55b45648927679791f472de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_GroupName: Right
+  m_InteractionManager: {fileID: 0}
+  m_StartingGroupMembers:
+  - {fileID: 4037164402833129673}
+  - {fileID: 7248744237446593196}
+  m_StartingInteractionOverridesMap:
+  - groupMember: {fileID: 4037164402833129673}
+    overrideGroupMembers: []
+  - groupMember: {fileID: 7248744237446593196}
+    overrideGroupMembers:
+    - {fileID: 4037164402833129673}
 --- !u!1 &2343939160286333257
 GameObject:
   m_ObjectHideFlags: 0
@@ -2083,6 +2089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5041337712423482359}
+  - component: {fileID: 5270254828983530829}
   m_Layer: 0
   m_Name: Left Hand
   m_TagString: Untagged
@@ -2108,6 +2115,27 @@ Transform:
   - {fileID: 3511973999049793089}
   m_Father: {fileID: 873005602538150729}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5270254828983530829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3946198177842235789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a50d88b55b45648927679791f472de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_GroupName: Left
+  m_InteractionManager: {fileID: 0}
+  m_StartingGroupMembers:
+  - {fileID: 155666787405900285}
+  - {fileID: 4711833205192157519}
+  m_StartingInteractionOverridesMap:
+  - groupMember: {fileID: 155666787405900285}
+    overrideGroupMembers:
+    - {fileID: 4711833205192157519}
 --- !u!1 &4087331094005318164
 GameObject:
   m_ObjectHideFlags: 0
@@ -2730,7 +2758,6 @@ GameObject:
   m_Component:
   - component: {fileID: 873005602538150729}
   - component: {fileID: 9115962766719959206}
-  - component: {fileID: 6968699300363712603}
   - component: {fileID: 7340940290479144102}
   m_Layer: 0
   m_Name: Left Controller
@@ -2824,27 +2851,6 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
---- !u!114 &6968699300363712603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6534679071805430755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a50d88b55b45648927679791f472de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_GroupName: Left
-  m_InteractionManager: {fileID: 0}
-  m_StartingGroupMembers:
-  - {fileID: 155666787405900285}
-  - {fileID: 4711833205192157519}
-  m_StartingInteractionOverridesMap:
-  - groupMember: {fileID: 155666787405900285}
-    overrideGroupMembers:
-    - {fileID: 4711833205192157519}
 --- !u!114 &7340940290479144102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3004,7 +3010,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1441430386437797803}
   - component: {fileID: 5957946551696127634}
-  - component: {fileID: 8026838199098000888}
   - component: {fileID: 4884173047478601615}
   - component: {fileID: 1957747928592924102}
   m_Layer: 0
@@ -3058,29 +3063,6 @@ MonoBehaviour:
   m_RayInteractorChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &8026838199098000888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7247358847740557317}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a50d88b55b45648927679791f472de, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_GroupName: Right
-  m_InteractionManager: {fileID: 0}
-  m_StartingGroupMembers:
-  - {fileID: 4037164402833129673}
-  - {fileID: 7248744237446593196}
-  m_StartingInteractionOverridesMap:
-  - groupMember: {fileID: 4037164402833129673}
-    overrideGroupMembers: []
-  - groupMember: {fileID: 7248744237446593196}
-    overrideGroupMembers:
-    - {fileID: 4037164402833129673}
 --- !u!114 &4884173047478601615
 MonoBehaviour:
   m_ObjectHideFlags: 0

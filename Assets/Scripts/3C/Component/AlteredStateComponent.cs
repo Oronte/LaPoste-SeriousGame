@@ -53,8 +53,8 @@ public class AlteredStateComponent : MonoBehaviour
     [SerializeField] bool useLatence = false;
     [SerializeField] float latenceForce = 0.0f;
     //[SerializeField] float tolerance = 0.01f;
-    [SerializeField, VisibleAnywhereProperty] Transform rootRightParent = null;
     [SerializeField, VisibleAnywhereProperty] Transform rootLeftParent = null;
+    [SerializeField, VisibleAnywhereProperty] Transform rootRightParent = null;
     //[SerializeField, VisibleAnywhereProperty] float currentDelayTime = 0.0f, maxDelayTime = 0.0f;
     //[SerializeField] float minDelay = 0.005f, MaxDelay = 0.02f;
     //[SerializeField] bool useTimerDelay = false;
@@ -72,12 +72,14 @@ public class AlteredStateComponent : MonoBehaviour
         if (useShaking)
         {
             //UpdateTime(ref currentTime, shakingFrequency, ComputeNewOffset);
-            Shake();
+            Shake(leftHand);
+            Shake(rightHand,true);
         }
         if (useLatence)
         {
             //CheckAvailableLatence();
-            Latence();
+            Latence(rootLeft, rootLeftParent);
+            Latence(rootRight, rootRightParent);
         }
         
 
@@ -87,7 +89,10 @@ public class AlteredStateComponent : MonoBehaviour
     {
         inputComponent = GetComponent<InputComponent>();
         if(useLatence)
-            Detach();
+        {
+            Detach(rootLeft, ref rootLeftParent);
+            Detach(rootRight, ref rootRightParent);
+        }
     }
 
     //void Inverse()
@@ -99,12 +104,12 @@ public class AlteredStateComponent : MonoBehaviour
     //    shouldBePositive = !shouldBePositive;
     //}
 
-    void Shake()
+    void Shake(Transform _remote, bool _isReverse = false)
     {
-        if (!useShaking || !leftHand || !rightHand || !inputComponent)
+        if (!_remote || !useShaking || !inputComponent)
             return;
 
-        Debug.Log("Shake");
+        //Debug.Log("Shake");
 
         Vector3 _offset = Vector3.zero;
         int _size = shakeSettings.Count;
@@ -122,18 +127,18 @@ public class AlteredStateComponent : MonoBehaviour
         //    leftHand.localPosition = Vector3.Lerp(currentOffset, shakeOffset, currentTime / shakingFrequency) * Time.deltaTime;
         //else
 
-        leftHand.localPosition = _offset;
+        _remote.localPosition = _isReverse ? -_offset : _offset;
     }
 
-    void Latence()
+    void Latence(Transform _root, Transform _parent)
     {
-        if (!useLatence /*|| !remoteCanMove*/) return;
+        if (!useLatence || !_root ||!_parent) return;
 
-        float _dist = Vector3.Distance(rootLeft.position, rootLeftParent.position);
+        float _dist = Vector3.Distance(_root.position, _parent.position);
 
         //if (_dist > tolerance)
-        rootLeft.position = Vector3.MoveTowards(rootLeft.position, rootLeftParent.position, latenceForce * _dist * Time.deltaTime);
-        rootLeft.rotation = rootLeftParent.rotation;
+        _root.position = Vector3.MoveTowards(_root.position, _parent.position, latenceForce * _dist * Time.deltaTime);
+        _root.rotation = _parent.rotation;
         //else
         //{
         //    remoteCanMove = false;
@@ -171,7 +176,7 @@ public class AlteredStateComponent : MonoBehaviour
 
         _shakeSettings.oldSocketOffset = _shakeSettings.shakeOffset;
         _shakeSettings.shakeOffset = new Vector3(_x, _y, _z);
-        Debug.Log($"New Shake Offset: {_shakeSettings.shakeOffset}");
+        //Debug.Log($"New Shake Offset: {_shakeSettings.shakeOffset}");
     }
 
     void SwapVector(ref Vector3 _a,ref Vector3 _b)
@@ -191,12 +196,12 @@ public class AlteredStateComponent : MonoBehaviour
         }
     }
 
-    public void Detach()
+    public void Detach(Transform _root,ref Transform _parent)
     {
-        if (!leftHand || !rightHand || !rootLeft || !rootRight) return;
-        rootLeftParent = rootLeft.parent;
-        rootLeft.parent = rootLeftParent.parent;
-        Debug.Log("Left hand detached");
+        if (!_root) return;
+        _parent = _root.parent;
+        _root.parent = _parent.parent;
+        //Debug.Log("Left hand detached");
     }
 
 

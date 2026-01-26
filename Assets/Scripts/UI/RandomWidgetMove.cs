@@ -25,14 +25,11 @@ public class RandomWidgetMove : MonoBehaviour
     //Distance max de déplacement
     [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Distance max de déplacement")]
     float distanceLimit = 100.0f;
-    //Mode de déplacement
-    [SerializeField, ToggleVisibleAnywhereProperty, Tooltip("Mode de déplacement")]
-    Space spaceMove = Space.Self; 
     //Utilisation des debugs
     [SerializeField, Tooltip("Utilisation des debugs")]
     bool useDebug = false;
     //Utilisation des debugs seulement si l'objet est sélectionner
-    [SerializeField, HideCondition(nameof(useDebug)), ToggleVisibleAnywhereProperty, Tooltip("Seulement si l'objet est sélectionner")]
+    [SerializeField, HideCondition(nameof(useDebug)), Tooltip("Seulement si l'objet est sélectionner")]
     bool debugOnlyIfSelected = true;
     //Couleur du cercle du rayon
     [SerializeField, HideCondition(nameof(useDebug)), ToggleVisibleAnywhereProperty, Tooltip("Couleur du cercle du rayon")]
@@ -76,6 +73,16 @@ public class RandomWidgetMove : MonoBehaviour
 
     }
     /// <summary>
+    /// Lance ou Arrete le movement aléatoire continu du widget selon son le bool
+    /// </summary>
+    /// <param name="_status">status final rechercher</param>
+    public void SetRandomMove(bool _status)
+    {
+        if (_status) StartRandomMove();
+        else StopRandomMove();
+
+    }
+    /// <summary>
     /// Lance le movement aléatoire continu du widget
     /// </summary>
     public void StartRandomMove()
@@ -104,17 +111,17 @@ public class RandomWidgetMove : MonoBehaviour
             StopRandomMove();
             return;
         }
-        Vector2 _randomUnit = Random.insideUnitCircle;
-        Vector3 _randomOffset = new Vector3(_randomUnit.x, _randomUnit.y, 0) * randomMoveRadius;
-        if (Vector3.Distance(widgetTransform.position + _randomOffset, startPos) >= distanceLimit)
+        Vector2 _randomUnit = Random.insideUnitCircle * randomMoveRadius;
+        Vector3 _randomOffset = widgetTransform.up * _randomUnit.y + _randomUnit.x * widgetTransform.right; 
+        Vector3 _targetPos = widgetTransform.position + _randomOffset;
+        if (Vector3.Distance(_targetPos, startPos) >= distanceLimit)
         {
-            widgetTransform.position = Vector3.MoveTowards(widgetTransform.position, startPos, Time.deltaTime * randomMoveRadius);
+            _targetPos = Vector3.MoveTowards(widgetTransform.position, startPos, Random.value * randomMoveRadius);
             return;
         }
-        //_randomOffset.z = widgetTransform.position.z;
-        _randomOffset = Vector3.ProjectOnPlane(_randomOffset, widgetTransform.forward);
-        widgetTransform.Translate(_randomOffset, spaceMove);
-        //widgetTransform.position += _randomOffset;
+        //_randomOffset = Vector3.ProjectOnPlane(_randomOffset, widgetTransform.right);
+        //widgetTransform.Translate(_randomOffset);
+        widgetTransform.position = _targetPos;
     }
 
     /// <summary>
